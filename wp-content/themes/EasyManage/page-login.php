@@ -43,7 +43,7 @@ Template Name: Login Page
 <style>
     .main-container{
         width: 100%;
-        height:92vh;
+        height:83vh;
         background-color: #e6e6e6;
     }
 </style>
