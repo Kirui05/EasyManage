@@ -8,6 +8,47 @@ Template Name: Update project Page
 
 <div class="main-container">
     
+<div class="login">
+        <div class="logcover">
+            <form action="" method="POST">
+                <div class="form">
+                    <h2>Update Project</h2>
+
+                    <div class="input1">
+                        <label for="">Project name</label>
+                        <div class="icons1">
+                            <ion-icon name="book-outline"></ion-icon>
+                            <input type="text" placeholder="Enter project name" name="project" required>
+                        </div>
+                    </div>
+                    <div class="input1">
+                        <label for="">Project description</label>
+                        <div class="icons1">
+                            <textarea name="text" placeholder="Enter project description" id="p_desc" cols="74" rows="2" style="border: 1px solid #b8b6b6;"></textarea>
+                        </div>
+                    </div>
+                    <div class="input1">
+                        <label for="">Due date</label>
+                        <div class="icons1">
+                            <ion-icon name="calendar-outline"></ion-icon>
+                            <input type="date" placeholder="" name="date" required>
+                        </div>
+                    </div>
+                    <div class="input1">
+                        <label for="">Assignee</label>
+                        <div class="icons1">
+                            <ion-icon name="lock-open-outline"></ion-icon>
+                            <input type="text" placeholder="Enter assignee" name="assignee" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btnlog" name="login-submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
 <style>
     .main-container{
         width: 100%;

@@ -24,8 +24,7 @@ Template Name: Create project Page
                     <div class="input1">
                         <label for="">Project description</label>
                         <div class="icons1">
-                            <ion-icon name="book-outline"></ion-icon>
-                            <textarea name="text" placeholder="Enter project description" id="p_desc" cols="75" rows="2"></textarea>
+                            <textarea name="text" placeholder="Enter project description" id="p_desc" cols="74" rows="2" style="border: 1px solid #b8b6b6;"></textarea>
                         </div>
                     </div>
                     <div class="input1">
@@ -42,7 +41,7 @@ Template Name: Create project Page
                             <input type="text" placeholder="Enter assignee" name="assignee" required>
                         </div>
                     </div>
-                    <button type="submit" class="btnlog" name="login-submit">Update</button>
+                    <button type="submit" class="btnlog" name="login-submit">Create</button>
                 </div>
             </form>
         </div>
