@@ -5,6 +5,7 @@ Template Name: Update project Page
 ?>
 
 <?php get_header() ?>
+<?php get_sidebar()?>
 
 <div class="main-container">
 

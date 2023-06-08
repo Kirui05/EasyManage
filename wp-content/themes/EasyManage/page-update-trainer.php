@@ -5,6 +5,7 @@ Template Name: Update trainer Page
 ?>
 
 <?php get_header()?>
+<?php get_sidebar()?>
 
 <div class="main-container">
 
