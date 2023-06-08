@@ -8,6 +8,7 @@ Template Name: Create trainee Page
 
 <div class="main-container">
 
+<!-- Create trainee form -->
 <div class="login">
         <div class="logcover">
             <form action="" method="POST">

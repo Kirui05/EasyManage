@@ -6,6 +6,7 @@ Template Name: Dashboard Page
 
 <?php get_header()?>
 
+<!-- Dashboard form -->
 <div class="main-container">
 
 <?php get_sidebar()?>

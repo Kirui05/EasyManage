@@ -8,6 +8,7 @@ Template Name: Create trainer Page
 
 <div class="main-container">
 
+<!-- Create trainer form -->
     <div class="login">
         <div class="logcover">
             <form action="" method="POST">

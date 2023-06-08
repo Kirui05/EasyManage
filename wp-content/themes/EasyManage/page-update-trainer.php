@@ -8,6 +8,7 @@ Template Name: Update trainer Page
 
 <div class="main-container">
 
+<!-- Update trainer form -->
 <div class="login">
         <div class="logcover">
             <form action="" method="POST">

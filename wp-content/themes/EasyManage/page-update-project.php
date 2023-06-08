@@ -8,6 +8,7 @@ Template Name: Update project Page
 
 <div class="main-container">
 
+<!-- Update project form -->
     <div class="login">
         <div class="logcover">
             <form action="" method="POST">

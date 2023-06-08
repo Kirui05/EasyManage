@@ -8,6 +8,7 @@ Template Name: Update trainee Page
 
 <div class="main-container">
 
+<!-- Update trainee form -->
     <div class="login">
         <div class="logcover">
             <form action="" method="POST">
