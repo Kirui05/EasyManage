@@ -13,7 +13,7 @@ Template Name: Login Page
     <div class="logcover">
         <div class="left">
             <h1>Welcome!</h1>
-            <p>To keep connected with us <br> please login with your personal info</p>
+            <p>To keep connected with us <br> please login with your personal info.</p>
         </div>
         <form action="" method="POST">
             <div class="form">
@@ -33,7 +33,7 @@ Template Name: Login Page
                         <input type="password" placeholder="Enter password" name="password" required>
                     </div>
                 </div>
-                <button type="submit" class="btnreg" name="login-submit">Login</button>
+                <button type="submit" class="btnlog" name="login-submit">Login</button>
             </div>
         </form>
     </div>
