@@ -4,11 +4,11 @@ Template Name: Update project Page
 */
 ?>
 
-<?php get_header()?>
+<?php get_header() ?>
 
 <div class="main-container">
-    
-<div class="login">
+
+    <div class="login">
         <div class="logcover">
             <form action="" method="POST">
                 <div class="form">
@@ -37,7 +37,7 @@ Template Name: Update project Page
                     <div class="input1">
                         <label for="">Assignee</label>
                         <div class="icons1">
-                            <ion-icon name="lock-open-outline"></ion-icon>
+                            <ion-icon name="person-outline"></ion-icon>
                             <input type="text" placeholder="Enter assignee" name="assignee" required>
                         </div>
                     </div>
@@ -50,10 +50,10 @@ Template Name: Update project Page
 </div>
 
 <style>
-    .main-container{
+    .main-container {
         width: 100%;
-        height:83vh;
+        height: 83vh;
         background-color: #e6e6e6;
     }
 </style>
-<?php get_footer()?>
+<?php get_footer() ?>

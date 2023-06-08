@@ -29,7 +29,7 @@ Template Name: Update trainer Page
                         </div>
                     </div>
                     <div class="input1">
-                        <label for="">Email Address</label>
+                        <label for="">Email address</label>
                         <div class="icons1">
                             <ion-icon name="mail-outline"></ion-icon>
                             <input type="text" placeholder="Enter email address" name="email" required>

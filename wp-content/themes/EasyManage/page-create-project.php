@@ -37,7 +37,7 @@ Template Name: Create project Page
                     <div class="input1">
                         <label for="">Assignee</label>
                         <div class="icons1">
-                            <ion-icon name="lock-open-outline"></ion-icon>
+                            <ion-icon name="person-outline"></ion-icon>
                             <input type="text" placeholder="Enter assignee" name="assignee" required>
                         </div>
                     </div>
