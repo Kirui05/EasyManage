@@ -8,6 +8,8 @@ Template Name: Dashboard Page
 
 <div class="main-container">
 
+<?php get_sidebar()?>
+
 <style>
     .main-container{
         width: 100%;

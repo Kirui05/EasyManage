@@ -7,7 +7,7 @@ Template Name: Update project Page
 <?php get_header()?>
 
 <div class="main-container">
-
+    
 <style>
     .main-container{
         width: 100%;
