@@ -14,7 +14,7 @@ Template Name: Update program manager Page
         <div class="logcover">
             <form action="" method="POST">
                 <div class="form">
-                    <h2>Update program manager</h2>
+                    <h2>Update Program Manager</h2>
 
                     <div class="input1">
                         <label for="">Program manager name</label>

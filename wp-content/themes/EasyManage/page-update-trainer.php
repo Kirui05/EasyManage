@@ -12,7 +12,7 @@ Template Name: Update trainer Page
         <div class="logcover">
             <form action="" method="POST">
                 <div class="form">
-                    <h2>Update trainer</h2>
+                    <h2>Update Trainer</h2>
 
                     <div class="input1">
                         <label for="">Trainer name</label>

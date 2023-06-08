@@ -12,7 +12,7 @@ Template Name: Create trainer Page
         <div class="logcover">
             <form action="" method="POST">
                 <div class="form">
-                    <h2>Create trainer</h2>
+                    <h2>Create Trainer</h2>
 
                     <div class="input1">
                         <label for="">Trainer name</label>
