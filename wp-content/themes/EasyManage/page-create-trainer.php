@@ -50,7 +50,6 @@ Template Name: Create trainer Page
 
 </div>
 
-
 <style>
     .main-container {
         width: 100%;
