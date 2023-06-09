@@ -5,6 +5,8 @@ Template Name: Update project Page
 ?>
 
 <?php get_header() ?>
+
+<main>
 <?php get_sidebar()?>
 
 <div class="main-container">
@@ -50,6 +52,7 @@ Template Name: Update project Page
     </div>
 
 </div>
+</main>
 
 <style>
     main{

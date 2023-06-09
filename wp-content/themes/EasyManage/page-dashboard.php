@@ -5,12 +5,15 @@ Template Name: Dashboard Page
 ?>
 
 <?php get_header()?>
-<?php get_sidebar()?>
 
 <!-- Dashboard form -->
+
+<main>
+<?php get_sidebar()?>
+
 <div class="main-container">
 
-<?php get_sidebar()?>
+</main>
 
 <style>
     main{

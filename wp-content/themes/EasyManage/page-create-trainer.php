@@ -5,6 +5,8 @@ Template Name: Create trainer Page
 ?>
 
 <?php get_header() ?>
+
+<main>
 <?php get_sidebar()?>
 
 <div class="main-container">
@@ -51,6 +53,7 @@ Template Name: Create trainer Page
     </div>
 
 </div>
+</main>
 
 <style>
     main{

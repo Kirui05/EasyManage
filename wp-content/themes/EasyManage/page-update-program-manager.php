@@ -5,6 +5,8 @@ Template Name: Update program manager Page
 ?>
 
 <?php get_header()?>
+
+<main>
 <?php get_sidebar()?>
 
 <div class="main-container">
@@ -44,6 +46,7 @@ Template Name: Update program manager Page
     </div>
 
 </div>
+</main>
 
 <style>
     main{
