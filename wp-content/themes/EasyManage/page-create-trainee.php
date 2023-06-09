@@ -47,6 +47,11 @@ Template Name: Create trainee Page
 
 
 <style>
+    main{
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: 82vh;
+    }
     .main-container{
         width: 100%;
         height:82vh;
