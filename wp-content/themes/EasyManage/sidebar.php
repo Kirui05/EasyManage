@@ -48,9 +48,10 @@ if (in_array('administrator', $user_roles)) {
 
 ?>
 
-<div class="container-fluid" style="z-index: -1;">
-    <div class="row">
-        <div class="col-md-3 p-0">
+<div class="container-fluid" style="z-index: -1;height:100%">
+    <div class="row" style="height:100%">
+        <div class=" p-0" style="height:100%">
+            <!-- <div class="col-md-3 p-0"> -->
             <!-- Sidebar -->
             <div class="sidebar">
                 <?php foreach ($menu_options as $option) : ?>
@@ -60,33 +61,29 @@ if (in_array('administrator', $user_roles)) {
                     </a>
                 <?php endforeach; ?>
                 <div class="logout">
-                <div class="logout-body">
-                    <ul style="list-style-type: none;">
-                        <li class="nav-item ">
-                            <a class="nav-link logout-text" href="<?php echo wp_logout_url(home_url()); ?>">
-                                <i class="bi bi-box-arrow-right logout-icon"></i>Logout
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="logout-body">
+                        <ul style="list-style-type: none;">
+                            <li class="nav-item ">
+                                <a class="nav-link logout-text" href="<?php echo wp_logout_url(home_url()); ?>">
+                                    <i class="bi bi-box-arrow-right logout-icon"></i>Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            </div>
-         
+
         </div>
     </div>
 </div>
 
 <style>
     .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        margin-top: 5rem;
-        background-color: #5277D6;
+        background-color: #008759;
         color: #fff;
         padding: 20px;
         height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: column;
     }
@@ -97,7 +94,6 @@ if (in_array('administrator', $user_roles)) {
         margin-top: auto;
         border-top: 2px solid #fff;
         width: 100%;
-        margin-bottom: 70px;
         color: #ffffff;
     }
 
