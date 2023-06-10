@@ -6,31 +6,28 @@ $user_roles = $user->roles;
 
 // Define menu options based on user roles
 $admin_menu = array(
-    array('icon' => 'bi bi-house', 'text' => 'Home', 'link' => '#'),
-    array('icon' => 'bi bi-person-plus', 'text' => 'Add Program Manager', 'link' => '#'),
-    array('icon' => 'bi bi-people', 'text' => 'View All Members', 'link' => '#'),
-    array('icon' => 'bi bi-file-earmark-text', 'text' => 'View All Projects', 'link' => '#'),
-    array('icon' => 'bi bi-gear', 'text' => 'Admin Panel', 'link' => '#')
+    array('icon' => 'bi bi-grid', 'text' => 'Dashboard', 'link' => '#'),
+    array('icon' => 'bi bi-people', 'text' => 'View All Users', 'link' => '#'),
+    array('icon' => 'bi bi-person-plus', 'text' => 'Create Program Manager', 'link' => 'http://localhost/EasyManage/create-program-manager/'),
 );
 
 $program_manager_menu = array(
-    array('icon' => 'bi bi-house', 'text' => 'Home', 'link' => '#'),
-    array('icon' => 'bi bi-person-plus', 'text' => 'Add Trainer', 'link' => '#'),
-    array('icon' => 'bi bi-people', 'text' => 'View All Members', 'link' => '#'),
-    array('icon' => 'bi bi-file-earmark-text', 'text' => 'View All Projects', 'link' => '#')
+    array('icon' => 'bi bi-grid', 'text' => 'Dashboard', 'link' => '#'),
+    array('icon' => 'bi bi-people', 'text' => 'View All Trainers', 'link' => '#'),
+    array('icon' => 'bi bi-person-plus', 'text' => 'Create Trainer', 'link' => '#'),
 );
 
 $trainer_menu = array(
-    array('icon' => 'bi bi-house', 'text' => 'Home', 'link' => '#'),
-    array('icon' => 'bi bi-person-plus', 'text' => 'Add Trainee', 'link' => '#'),
-    array('icon' => 'bi bi-people', 'text' => 'View Team Members', 'link' => '#'),
-    array('icon' => 'bi bi-file-earmark-text', 'text' => 'View Team Projects', 'link' => '#'),
-    array('icon' => 'bi bi-file-earmark-plus', 'text' => 'Create New Project', 'link' => '#')
+    array('icon' => 'bi bi-grid', 'text' => 'Dashboard', 'link' => '#'),
+    array('icon' => 'bi bi-people', 'text' => 'View All Trainees', 'link' => '#'),
+    array('icon' => 'bi bi-person-plus', 'text' => 'Create Trainee', 'link' => '#'),
+    array('icon' => 'bi bi-file-earmark-plus', 'text' => 'Create Project', 'link' => '#'),
+    array('icon' => 'bi bi-file-earmark-text', 'text' => 'View All Projects', 'link' => '#'),
 );
 
 $trainee_menu = array(
-    array('icon' => 'bi bi-house', 'text' => 'Home', 'link' => '#'),
-    array('icon' => 'bi bi-file-earmark-check', 'text' => 'Completed Projects', 'link' => '#')
+    array('icon' => 'bi bi-grid', 'text' => 'Dashboard', 'link' => '#'),
+    array('icon' => 'bi bi-file-earmark-text', 'text' => 'View All Projects', 'link' => '#'),
 );
 
 $menu_options = array();
@@ -65,7 +62,7 @@ if (in_array('administrator', $user_roles)) {
                         <ul style="list-style-type: none;">
                             <li class="nav-item ">
                                 <a class="nav-link logout-text" href="<?php echo wp_logout_url(home_url()); ?>">
-                                    <i class="bi bi-box-arrow-right logout-icon"></i>Logout
+                                    <i class="bi bi-box-arrow-left logout-icon"></i>Logout
                                 </a>
                             </li>
                         </ul>
@@ -103,7 +100,7 @@ if (in_array('administrator', $user_roles)) {
         color: #fff;
         text-decoration: none;
         margin-bottom: 10px;
-        border-bottom: 2px solid #fff;
+        /* border-bottom: 2px solid #fff; */
     }
 
     .menu-icon {
