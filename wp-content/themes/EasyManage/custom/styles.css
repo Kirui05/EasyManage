@@ -111,7 +111,7 @@ label:last-child span {
 	width: 100%;
 	height: 100%;
 	padding-left: 30px;
-	background: #fff;
+	background: #e6e6e6;
 	border: 1px solid rgb(184, 182, 182);
 	border-radius: 5px;
 	font-size: 16px;
@@ -133,7 +133,7 @@ label:last-child span {
 }
 .form-alt a {
 	text-decoration: none;
-	color: #6c4fff;
+	color: #008759;
 }
 
 @media screen and (max-width: 600px) {
@@ -150,5 +150,10 @@ footer {
 	text-align: center;
 	font-size: 14px;
 	padding: 20px;
-	/* opacity: 0.5; */
+}
+.stack{
+	height: 35px;
+	border: 1px solid #b8b6b6;
+	background-color: #e6e6e6;
+	border-radius: 0.375em 0.375em 0.375em 0.375em;
 }

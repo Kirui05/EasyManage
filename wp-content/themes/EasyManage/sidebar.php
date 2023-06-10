@@ -87,10 +87,11 @@ if (in_array('administrator', $user_roles)) {
 
     .logout {
         display: flex;
-        justify-content: center;
-        margin-top: auto;
+        margin-top: 350px;
         border-top: 2px solid #fff;
         width: 100%;
+        font-size: 20px;
+        font-weight: bold;
         color: #ffffff;
     }
 
