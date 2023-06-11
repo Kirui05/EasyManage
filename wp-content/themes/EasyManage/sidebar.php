@@ -5,8 +5,6 @@ $user = wp_get_current_user();
 $user_roles = $user->roles;
 
 // Define menu options based on user roles
-
-
 $admin_menu = array(
     array('icon' => 'bi bi-grid', 'text' => 'Dashboard', 'link' => '#'),
     array('icon' => 'bi bi-people', 'text' => 'View All Users', 'link' => '#'),
@@ -47,12 +45,16 @@ if (in_array('administrator', $user_roles)) {
 
 ?>
 
-<div class="container-fluid" style="z-index: -1;height:100%">
-    <div class="row" style="height:100%">
-        <div class=" p-0" style="height:100%">
-            <!-- <div class="col-md-3 p-0"> -->
+<div class="container-fluid" style="z-index: -1; height: 100%;">
+    <div class="row" style="height: 100%;">
+        <div class="p-0" style="height: 100%;">
             <!-- Sidebar -->
             <div class="sidebar">
+                <!-- Profile Picture -->
+                <div class="profile-picture">
+                    <img src="https://static.vecteezy.com/system/resources/previews/002/002/257/original/beautiful-woman-avatar-character-icon-free-vector.jpg" alt="Profile Picture" class="profile-image">
+                    <a href="" class="change-picture-link">Change Picture</a>
+                </div>
                 <?php foreach ($menu_options as $option) : ?>
                     <a href="<?php echo $option['link']; ?>" class="menu-link">
                         <i class="<?php echo $option['icon']; ?> menu-icon"></i>
@@ -71,7 +73,6 @@ if (in_array('administrator', $user_roles)) {
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -87,13 +88,32 @@ if (in_array('administrator', $user_roles)) {
         flex-direction: column;
     }
 
+    .profile-picture {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .change-picture-link {
+        color: #fff;
+        font-size: smaller;
+        text-decoration: underline;
+    }
+
     .logout {
         display: flex;
-        margin-top: 350px;
+        margin-top: auto;
         border-top: 2px solid #fff;
         width: 100%;
         font-size: 20px;
-        font-weight: bold;
         color: #ffffff;
     }
 
@@ -103,7 +123,6 @@ if (in_array('administrator', $user_roles)) {
         color: #fff;
         text-decoration: none;
         margin-bottom: 10px;
-        /* border-bottom: 2px solid #fff; */
     }
 
     .menu-icon {

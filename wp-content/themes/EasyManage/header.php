@@ -30,7 +30,7 @@
                     <!-- Search form and button -->
                     <form action="/search" method="get" style="margin-top:5px;">
                         <input style="border:1px solid #b8b6b6;background-color:#fff;border-radius: 0.375em 0.375em 0.375em 0.375em" type="text" name="q" placeholder="Search..." />
-                        <input style="border:1px solid #b8b6b6;border-radius:0.375em 0.375em 0.375em 0.375em;background-color:#008759;color:#fff" type="submit" value="Search" />
+                        <input style="border:1px solid #b8b6b6;border-radius:0.375em 0.375em 0.375em 0.375em;background-color:#008759;color:#fff;" type="submit" value="Search" />
                     </form>
 
                     <!-- Username and icon -->
