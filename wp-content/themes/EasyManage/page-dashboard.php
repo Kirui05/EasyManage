@@ -50,14 +50,15 @@ Template Name: Dashboard Page
 
                 .calendar .day {
                     text-align: center;
-                    background-color: #fff;
-                    border: 1px solid #e6e6e6;
+                    background-color: #e6e6e6;
+                    /* border: 1px solid #e6e6e6; */
                     padding: 5px;
                 }
 
                 .calendar .day.current {
                     background-color: #008759;
                     color: #fff;
+                    font-weight: bold;
                 }
             </style>
         </head>
