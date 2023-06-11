@@ -13,6 +13,16 @@ Template Name: Dashboard Page
 
 <div class="main-container">
 
+<div class="card">
+  <img src="image.jpg" alt="Card Image">
+  <div class="card-content">
+    <h3>Users</h3>
+    <div class="number-bubble">42</div>
+    <!-- <p>This is a sample card.</p> -->
+    <a href="#" class="btn">Read More</a>
+  </div>
+</div>
+
 </main>
 
 <style>
