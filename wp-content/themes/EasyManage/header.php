@@ -16,7 +16,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light" style="margin-top: -30px; background-color: #fff">
         <a class="navbar-brand logo" href="#">
-            <span style="color:#008759;font-size:30px;font-weight:bold;margin-left:10px" >Easy</span><span style="color:#000;font-size:30px;font-weight:bold">Manage</span>
+            <span style="color:#008759;font-size:30px;font-weight:bold;margin-left:10px">Easy</span><span style="color:#000;font-size:30px;font-weight:bold">Manage</span>
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,8 +27,13 @@
             <ul class="navbar-nav">
                 <?php if (is_user_logged_in()) : ?>
 
-                    <!-- Username and icon -->
+                    <!-- Search form and button -->
+                    <form action="/search" method="get" style="margin-top:5px;">
+                        <input style="border:1px solid #b8b6b6;background-color:#fff;border-radius: 0.375em 0.375em 0.375em 0.375em" type="text" name="q" placeholder="Search..." />
+                        <input style="border:1px solid #b8b6b6;border-radius:0.375em 0.375em 0.375em 0.375em;background-color:#008759;color:#fff" type="submit" value="Search" />
+                    </form>
 
+                    <!-- Username and icon -->
                     <li class="nav-item">
                         <a class="nav-link username" href="#">
                             <i class="bi bi-person"></i> <?php echo wp_get_current_user()->display_name; ?>

@@ -5,6 +5,8 @@ $user = wp_get_current_user();
 $user_roles = $user->roles;
 
 // Define menu options based on user roles
+
+
 $admin_menu = array(
     array('icon' => 'bi bi-grid', 'text' => 'Dashboard', 'link' => '#'),
     array('icon' => 'bi bi-people', 'text' => 'View All Users', 'link' => '#'),
