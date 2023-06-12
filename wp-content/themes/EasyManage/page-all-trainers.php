@@ -33,7 +33,7 @@ Template Name: All trainers Page
                     <td>john@example.com</td>
                     <td>Trainer</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
 
@@ -47,7 +47,7 @@ Template Name: All trainers Page
                     <td>jane@example.com</td>
                     <td>Trainer</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
 
@@ -61,7 +61,7 @@ Template Name: All trainers Page
                     <td>joel@example.com</td>
                     <td>Trainer</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
 
@@ -75,7 +75,7 @@ Template Name: All trainers Page
                     <td>nic@example.com</td>
                     <td>Trainer</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
 
@@ -89,7 +89,7 @@ Template Name: All trainers Page
                     <td>hope@example.com</td>
                     <td>Trainer</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
                 <!-- Add more rows as needed -->

@@ -1,4 +1,9 @@
 <?php
+
+if (isset($_POST['update-trainee'])) {
+    update_user_meta( get_current_user_id(), 'update_trainee', $_POST['update'] );
+wp_redirect('http://localhost/EasyManage/all-trainees/');
+    }
 /*
 Template Name: Update trainee Page
 */
@@ -39,7 +44,7 @@ Template Name: Update trainee Page
                             <input type="password" placeholder="Enter password" name="password" required>
                         </div>
                     </div>
-                    <button type="submit" class="btnlog" name="login-submit">Update</button>
+                    <button type="submit" class="btnlog" name="update-trainee">Update</button>
                 </div>
             </form>
         </div>

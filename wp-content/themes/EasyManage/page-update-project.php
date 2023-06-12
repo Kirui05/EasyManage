@@ -1,4 +1,9 @@
 <?php
+
+if (isset($_POST['update-project'])) {
+    update_user_meta( get_current_user_id(), 'update_project', $_POST['update'] );
+wp_redirect('http://localhost/EasyManage/projects/');
+    }
 /*
 Template Name: Update project Page
 */
@@ -46,7 +51,7 @@ Template Name: Update project Page
                                 <input type="text" placeholder="Enter assignee" name="assignee" required>
                             </div>
                         </div>
-                        <button type="submit" class="btnlog" name="login-submit">Update</button>
+                        <button type="submit" class="btnlog" name="update-project">Update</button>
                     </div>
                 </form>
             </div>

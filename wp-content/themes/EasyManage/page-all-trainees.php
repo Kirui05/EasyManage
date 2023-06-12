@@ -11,7 +11,7 @@ Template Name: All trainees Page
 
     <div class="main-container">
 
-    <!-- All trainees table -->
+        <!-- All trainees table -->
         <table class="table">
             <thead>
                 <tr style="color:#008759">
@@ -33,7 +33,7 @@ Template Name: All trainees Page
                     <td>john@example.com</td>
                     <td>Trainee</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                        <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
 
@@ -47,7 +47,7 @@ Template Name: All trainees Page
                     <td>jane@example.com</td>
                     <td>Trainee</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
 
@@ -61,7 +61,7 @@ Template Name: All trainees Page
                     <td>joel@example.com</td>
                     <td>Trainee</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
 
@@ -75,7 +75,7 @@ Template Name: All trainees Page
                     <td>nic@example.com</td>
                     <td>Trainee</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
 
@@ -89,7 +89,7 @@ Template Name: All trainees Page
                     <td>hope@example.com</td>
                     <td>Trainee</td>
                     <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
                     </td>
                 </tr>
                 <!-- Add more rows as needed -->
@@ -181,8 +181,9 @@ Template Name: All trainees Page
     .table td:last-child {
         border-right: 1px solid #e6e6e6;
     }
+
     a:hover {
-      color: white;
+        color: white;
     }
 </style>
 

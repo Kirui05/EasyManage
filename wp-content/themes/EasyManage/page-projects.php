@@ -34,7 +34,7 @@ Template Name: Projects Page
                     <td>Allow Admin to deactivate trainee accounts xxx</td>
                     <td>Nick, Collins</td>
                     <td>
-                        <i style="color:#000;" class="bi bi-pencil-square"></i>
+                        <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
                     </td>
                 </tr>
 
@@ -49,7 +49,7 @@ Template Name: Projects Page
                     <td>Allow Admin to deactivate trainee accounts xxx</td>
                     <td>Nick, Hope</td>
                     <td>
-                        <i style="color:#000;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
                     </td>
                 </tr>
 
@@ -64,7 +64,7 @@ Template Name: Projects Page
                     <td>Allow Admin to deactivate trainee accounts xxx</td>
                     <td>Mary, Collins</td>
                     <td>
-                        <i style="color:#000;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
                     </td>
                 </tr>
 
@@ -79,7 +79,7 @@ Template Name: Projects Page
                     <td>Allow Admin to deactivate trainee accounts xxx</td>
                     <td>Mercy, Collins</td>
                     <td>
-                        <i style="color:#000;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
                     </td>
                 </tr>
 
@@ -94,7 +94,7 @@ Template Name: Projects Page
                     <td>Allow Admin to deactivate trainee accounts xxx</td>
                     <td>Nick, Patrick</td>
                     <td>
-                        <i style="color:#000;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
                     </td>
                 </tr>
 
@@ -109,7 +109,7 @@ Template Name: Projects Page
                     <td>Allow Admin to deactivate trainee accounts xxx</td>
                     <td>Brian, Collins</td>
                     <td>
-                        <i style="color:#000;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
                     </td>
                 </tr>
 
@@ -124,7 +124,7 @@ Template Name: Projects Page
                     <td>Allow Admin to deactivate trainee accounts xxx</td>
                     <td>Nick, Patrick</td>
                     <td>
-                        <i style="color:#000;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
                     </td>
                 </tr>
 
@@ -139,7 +139,7 @@ Template Name: Projects Page
                     <td>Allow Admin to deactivate trainee accounts xxx</td>
                     <td>Mary, Collins</td>
                     <td>
-                        <i style="color:#000;" class="bi bi-pencil-square"></i>
+                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
                     </td>
                 </tr>
 
