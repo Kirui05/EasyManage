@@ -31,6 +31,7 @@ Template Name: Create trainer Page
                                 <option value="stack1">WordPress</option>
                                 <option value="stack2">Angular</option>
                                 <option value="stack3">C#</option>
+                                <option value="stack3">QA/QE</option>
                             </select>
                         </div>
                         <div class="input1">

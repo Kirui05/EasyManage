@@ -96,7 +96,7 @@ if (in_array('administrator', $user_roles)) {
             </div>
         </div>
     </div>
-
+    
     <style>
         .sidebar {
             background-color: #008759;
@@ -144,7 +144,9 @@ if (in_array('administrator', $user_roles)) {
             text-decoration: none;
             margin-bottom: 10px;
         }
-
+        a:hover {
+      color: white;
+    }
         .menu-icon {
             font-size: 20px;
             margin-right: 10px;
