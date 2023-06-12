@@ -12,7 +12,7 @@ Template Name: Dashboard Page
     <?php get_sidebar() ?>
 
     <div class="main-container">
-
+    
         <!-- calendar -->
         <?php
         // Get the current date
@@ -24,11 +24,13 @@ Template Name: Dashboard Page
 
         // Get the number of days in the current month
         $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+        // Get the month name
+        $monthName = date('F', strtotime($currentDate));
         ?>
 
         <!DOCTYPE html>
         <html>
-
         <head>
             <style>
                 .card {
@@ -36,7 +38,6 @@ Template Name: Dashboard Page
                     padding: 20px;
                     border-radius: 10px;
                     width: 300px;
-                    /* margin: 0 auto; */
                     margin: 25px;
                     font-family: Arial, sans-serif;
                 }
@@ -51,21 +52,19 @@ Template Name: Dashboard Page
                 .calendar .day {
                     text-align: center;
                     background-color: #e6e6e6;
-                    /* border: 1px solid #e6e6e6; */
                     padding: 5px;
                 }
 
                 .calendar .day.current {
                     background-color: #008759;
                     color: #fff;
-                    font-weight: bold;
                 }
             </style>
         </head>
 
         <body>
             <div class="card">
-                <h2>Calendar</h2>
+                <h2 style="color:#008759;"><?php echo $monthName; ?></h2>
                 <div class="calendar">
                     <?php
                     // Generate calendar days
@@ -81,17 +80,15 @@ Template Name: Dashboard Page
 
         </html>
 
-
         <!-- card -->
         <div class="card">
-            <img src="image.jpg" alt="Card Image">
             <div class="card-content">
-                <h3>Users</h3>
-                <div class="number-bubble">42</div>
-                <!-- <p>This is a sample card.</p> -->
-                <a href="#" class="btn">Read More</a>
+                <h3 style="color:#008759;font-size:25px;">To-Do List</h3>
+                <p>Today's activities...</p>
+                <a href="#" class="btn" style="background-color:#008759;border-radius:35px;">Read More</a>
             </div>
         </div>
+
 </main>
 
 <style>

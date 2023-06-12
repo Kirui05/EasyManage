@@ -64,8 +64,8 @@ if (in_array('administrator', $user_roles)) {
                 <div class="logout">
                     <div class="logout-body">
                         <ul style="list-style-type: none;">
-                            <li class="nav-item ">
-                                <a class="nav-link logout-text" style="" href="<?php echo wp_logout_url(home_url()); ?>">
+                            <li class="nav-item">
+                                <a class="nav-link logout-text"  href="<?php echo wp_logout_url(home_url()); ?>">
                                     <i class="bi bi-box-arrow-left logout-icon"></i>Logout
                                 </a>
                             </li>
