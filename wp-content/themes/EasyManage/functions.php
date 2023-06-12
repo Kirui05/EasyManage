@@ -17,11 +17,14 @@ function easymanage_script_enqueue()
 
 add_action('wp_enqueue_scripts', 'easymanage_script_enqueue');
 
-function custom_logout_redirect()
-{
-    wp_redirect("http://localhost/EasyManage/login/");
+function custom_logout_redirect() {
+
+    wp_redirect('http://localhost/easymanage/');
+
     exit;
+
 }
+
 add_action('wp_logout', 'custom_logout_redirect');
 
 // adding new user roles
@@ -59,3 +62,5 @@ function add_custom_roles()
 }
 
 add_action('init', 'add_custom_roles');
+
+add_filter('show_admin_bar', '__return_false');
