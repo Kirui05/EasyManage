@@ -185,6 +185,9 @@ Template Name: All users Page
     .table td:last-child {
         border-right: 1px solid #e6e6e6;
     }
+    a:hover {
+      color: white;
+    }
 </style>
 
 <?php get_footer() ?>
