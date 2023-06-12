@@ -28,7 +28,7 @@ Template Name: Create project Page
                         <div class="input1">
                             <label for="">Project description</label>
                             <div class="icons1">
-                                <textarea name="text" placeholder="Enter project description" id="p_desc" cols="74" rows="2" style="border: 1px solid #b8b6b6;resize: none;	border-radius: 0.375em 0.375em 0.375em 0.375em;	background-color: #e6e6e6;
+                                <textarea name="text" placeholder="Enter project description" id="p_desc" cols="74" rows="2" style="border: 1px solid #b8b6b6;resize: none;	border-radius: 0.375em 0.375em 0.375em 0.375em;	background-color: #f8f8f8;
 "></textarea>
                             </div>
                         </div>

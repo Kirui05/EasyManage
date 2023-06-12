@@ -127,7 +127,7 @@ if (isset($_POST['login'])) {
     .main-container {
         width: 100%;
         height: 82vh;
-        background-color: #e6e6e6;
+        background-color: #f8f8f8;
     }
 </style>
 

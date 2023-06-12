@@ -29,8 +29,8 @@
 
                     <!-- Search form and button -->
                     <form action="/search" method="get" style="margin-top:7px;">
-                        <input style="border:1px solid #b8b6b6;background-color:#fff;border-radius: 0.375em 0.375em 0.375em 0.375em" type="text" name="q" placeholder="Search..." />
-                        <input style="border:1px solid #b8b6b6;border-radius:0.375em 0.375em 0.375em 0.375em;background-color:#008759;color:#fff;margin-right:25px" type="submit" value="Search" />
+                        <input style="border:1px solid #e6e6e6;background-color:#fff;border-radius: 0.375em 0.375em 0.375em 0.375em" type="text" name="q" placeholder="Search..." />
+                        <input style="border:1px solid #f8f8f8;border-radius:0.375em 0.375em 0.375em 0.375em;background-color:#008759;color:#fff;margin-right:25px" type="submit" value="Search" />
                     </form>
 
                     <!-- Username and icon -->

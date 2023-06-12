@@ -48,7 +48,7 @@ Template Name: PM dashboard Page
 
                 .calendar .day {
                     text-align: center;
-                    background-color: #e6e6e6;
+                    background-color: #f8f8f8;
                     padding: 5px;
                 }
 
@@ -115,7 +115,7 @@ Template Name: PM dashboard Page
     .main-container {
         width: 100%;
         height: 82vh;
-        background-color: #e6e6e6;
+        background-color: #f8f8f8;
     }
 </style>
 <?php get_footer() ?>
