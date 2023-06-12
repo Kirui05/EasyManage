@@ -196,3 +196,7 @@ footer {
   border-radius: 4px;
   font-size: 14px;
 }
+.cardcover{
+  display: flex;
+  flex-direction: row;
+}

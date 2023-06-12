@@ -131,8 +131,7 @@ if (in_array('administrator', $user_roles)) {
 
         .logout {
             display: flex;
-            margin-top: 150px;
-            /* border-top: 2px solid #fff; */
+            margin-top: auto;
             width: 100%;
             font-size: 20px;
             color: #ffffff;

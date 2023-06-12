@@ -29,9 +29,6 @@ Template Name: PM dashboard Page
         $monthName = date('F', strtotime($currentDate));
         ?>
 
-        <!DOCTYPE html>
-        <html>
-        <head>
             <style>
                 .card {
                     background-color: #fff;
@@ -61,10 +58,10 @@ Template Name: PM dashboard Page
                     font-weight: bold;
                 }
             </style>
-        </head>
-
-        <body>
-            <div class="card">
+        
+        <div class="cardcover" style="display:flex;flex-direction:row">
+       <!-- calendar -->
+       <div class="card">
                 <h2 style="color:#008759;"><?php echo $monthName; ?></h2>
                 <div class="calendar">
                     <?php
@@ -77,11 +74,8 @@ Template Name: PM dashboard Page
                     ?>
                 </div>
             </div>
-        </body>
 
-        </html>
-
-        <!-- card -->
+        <!-- cards -->
         <div class="card">
             <div class="card-content">
                 <h3 style="color:#008759;font-size:25px;">To-Do List</h3>
@@ -89,6 +83,15 @@ Template Name: PM dashboard Page
                 <a href="#" class="btn" style="background-color:#008759;border-radius:35px;">Read More</a>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-content">
+                <h3 style="color:#008759;font-size:25px;">To-Do List</h3>
+                <p>Today's activities...</p>
+                <a href="#" class="btn" style="background-color:#008759;border-radius:35px;">Read More</a>
+            </div>
+        </div>
+</div>
 
 </main>
 

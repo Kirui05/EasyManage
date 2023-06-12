@@ -28,14 +28,10 @@ Template Name: Create trainer Page
                         <div class="input1">
                             <label for="stack">Stack</label>
                             <select class="stack" id="stack" name="stack">
-                                <option value="stack1">Stack 1</option>
-                                <option value="stack2">Stack 2</option>
-                                <option value="stack3">Stack 3</option>
+                                <option value="stack1">WordPress</option>
+                                <option value="stack2">Angular</option>
+                                <option value="stack3">C#</option>
                             </select>
-                            <!-- <div class="icons1">
-                            <ion-icon name="logo-stackoverflow"></ion-icon>
-                            <input type="text" placeholder="Enter stack" name="stack" required>
-                        </div> -->
                         </div>
                         <div class="input1">
                             <label for="">Email address</label>
