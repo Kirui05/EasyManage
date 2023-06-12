@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Dashboard Page
+Template Name: Trainer dashboard Page
 */
 ?>
 
