@@ -7,6 +7,8 @@ Template Name: Login Page
 <?php
 $error_message = '';
 
+$emailError = $passwordError = '';
+
 // Tracking login attempts
 
 function track_login_attempts($username, $password)
@@ -21,9 +23,9 @@ function track_login_attempts($username, $password)
 
     // Checking if the maximum no. of login attempts has been reached
 
-    if ($_SESSION['login_attempts'] >= 3) {
-        if (isset($_SESSION['login_attempt_time']) && time() - $_SESSION['login_attempt_time'] < 60) {
-            wp_die('Too many login attempts. Please try again after 1 minute.');
+    if ($_SESSION['login_attempts'] >= 5) {
+        if (isset($_SESSION['login_attempt_time']) && time() - $_SESSION['login_attempt_time'] < 30) {
+            wp_die('Too many login attempts. Please try again after 30 seconds.');
         }
 
         // variable to reset login_attempts session
@@ -32,6 +34,7 @@ function track_login_attempts($username, $password)
     $_SESSION['login_attempt_time'] = time();
 }
 add_action('wp_authenticate', 'track_login_attempts', 1, 2);
+
 if (is_user_logged_in()) {
     $user = wp_get_current_user();
     $user_roles = $user->roles;
@@ -51,6 +54,16 @@ if (is_user_logged_in()) {
 }
 
 if (isset($_POST['login'])) {
+    // Validation code for the login form
+
+    if (empty($_POST['email'])) {
+        $emailError = "* Email is required!";
+    }
+
+    if (empty($_POST['password'])) {
+        $passwordError = "* Password is required!";
+    }
+
     $employee_id = $_POST['email'];
     $user_password = $_POST['password'];
 
@@ -59,9 +72,9 @@ if (isset($_POST['login'])) {
     track_login_attempts($employee_id, $user_password);
     $user = get_user_by('email', $employee_id);
     if (!$user) {
-        $error_message = "Invalid user email.";
+        $error_message = "* Invalid user email.";
     } elseif (!wp_check_password($user_password, $user->user_pass, $user->ID)) {
-        $error_message = "Invalid password.";
+        $error_message = "* Invalid password.";
     } else {
         wp_set_current_user($user->ID);
         wp_set_auth_cookie($user->ID);
@@ -84,10 +97,18 @@ if (isset($_POST['login'])) {
         exit;
     }
 }
+
+
+
+add_action('login_form_validate', 'validate_login_form');
+
 ?>
 
-<?php wp_head(); ?>
-<?php get_header() ?>
+<!-- validating login form -->
+<?php
+wp_head();
+get_header();
+?>
 
 <div class="main-container">
 
@@ -98,22 +119,30 @@ if (isset($_POST['login'])) {
                 <h1>Welcome!</h1>
                 <p>To keep connected with us <br> please login with your personal info.</p>
             </div>
-            <form action="" method="POST">
+            <form action="<?php esc_url($_SERVER["REQUEST_URI"]); ?>" method="POST">
                 <div class="form">
                     <h2>Login</h2>
+
+                    <?php if ($error_message) : ?>
+                    <?php if ((!empty($user_password)) AND (!empty($employee_id))) : ?>
+                        <div class="error-message"><?php echo $error_message; ?></div>
+                    <?php endif; ?>
+                    <?php endif; ?>
 
                     <div class="input1">
                         <label for="">Email Address</label>
                         <div class="icons1">
                             <ion-icon name="mail-outline"></ion-icon>
-                            <input type="text" placeholder="Enter email address" name="email" required>
+                            <input type="text" placeholder="Enter email address" name="email">
+                            <span class="error" style="color: red; margin-top: 32px;"><?php if($emailError){ echo $emailError;} ?></span>
                         </div>
                     </div>
                     <div class="input1">
                         <label for="">Password</label>
                         <div class="icons1">
                             <ion-icon name="lock-open-outline"></ion-icon>
-                            <input type="password" placeholder="Enter password" name="password" required>
+                            <input type="password" placeholder="Enter password" name="password">
+                            <span class="error" style="color: red; margin-top: 32px;"><?php if($passwordError){ echo $passwordError;} ?></span>
                         </div>
                     </div>
                     <button type="submit" class="btnlog" name="login">Login</button>
@@ -123,12 +152,18 @@ if (isset($_POST['login'])) {
     </div>
 
 </div>
+
 <style>
     .main-container {
         width: 100%;
         height: 82vh;
         background-color: #f8f8f8;
     }
+
+    .error-message {
+        color: red;
+        margin-bottom: 10px;
+    }
 </style>
 
-<?php get_footer() ?>
+<?php get_footer(); ?>

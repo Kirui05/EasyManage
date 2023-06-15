@@ -25,6 +25,14 @@ function custom_logout_redirect() {
 
 }
 
+// validation
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+    return $data;
+}
+
 add_action('wp_logout', 'custom_logout_redirect');
 
 // adding new user roles
