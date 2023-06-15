@@ -41,7 +41,7 @@ $images = ['https://static.vecteezy.com/system/resources/thumbnails/002/002/257/
                     }
                     ?>
                     </div>
-                    <button style="width:100px;" type="pick" class="btnlog" name="pick">Pick</button>
+                    <button style="width:100px;" type="pick" class="btnlog" name="pick">Update</button>
 
                     <style>
                         .main-container {

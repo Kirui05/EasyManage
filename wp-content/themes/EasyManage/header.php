@@ -15,7 +15,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fff">
-        <a class="navbar-brand logo" href="#">
+        <a class="navbar-brand logo" href="http://localhost/EasyManage/">
             <span style="color:#008759;font-size:30px;font-weight:bold;margin-left:10px">Easy</span><span style="color:#000;font-size:30px;font-weight:bold">Manage</span>
         </a>
 
