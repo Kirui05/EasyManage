@@ -57,6 +57,22 @@ Template Name: PM dashboard Page
                 color: #fff;
                 font-weight: bold;
             }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 25px;
+            }
+
+            th, td {
+                border: 1px solid #ccc;
+                padding: 8px;
+            }
+
+            th {
+                background-color: #f8f8f8;
+                font-weight: bold;
+            }
         </style>
 
         <div class="cardcover" style="display:flex;flex-direction:row">
@@ -93,6 +109,22 @@ Template Name: PM dashboard Page
             </div>
         </div>
 
+        <!-- Latest trainer table -->
+        <?php
+        // Retrieve the latest trainer from the database
+        global $wpdb;
+        $latestTrainer = $wpdb->get_row("SELECT * FROM trainers ORDER BY id DESC LIMIT 1");
+
+        if ($latestTrainer) {
+            echo '<table>';
+            echo '<tr><th>ID</th><th>Name</th><th>Email</th></tr>';
+            echo '<tr><td>' . $latestTrainer->id . '</td><td>' . $latestTrainer->name . '</td><td>' . $latestTrainer->email . '</td></tr>';
+            echo '</table>';
+        } else {
+            echo '<p>No trainers found.</p>';
+        }
+        ?>
+    </div>
 </main>
 
 <style>
