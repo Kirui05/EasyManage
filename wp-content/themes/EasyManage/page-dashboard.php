@@ -65,37 +65,20 @@ Template Name: Dashboard Page
 
             <div class="cardcover" style="display:flex;flex-direction:row">
                 <!-- cards -->
-                <div class="card">
+                <div class="card" >
                     <div class="card-content">
-                        <h3 style="color:#008759;font-size:25px;">To-Do List</h3>
-                        <p>Today's activities...</p>
-                        <a href="#" class="btn" style="background-color:#008759;border-radius:35px;">Read More</a>
+                        <h3 style="color:#008759;font-size:25px;margin-bottom: 25px;">Users</h3>
+                        <p>Total number of users</p>
+                        <div style="width: 75px; height: 75px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; margin-bottom: 25px;">1</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-content">
-                        <h3 style="color:#008759;font-size:25px;">To-Do List</h3>
-                        <p>Today's activities...</p>
-                        <a href="#" class="btn" style="background-color:#008759;border-radius:35px;">Read More</a>
+                        <h3 style="color:#008759;font-size:25px;margin-bottom: 25px;">Projects</h3>
+                        <p>Total number of projects</p>
+                        <div style="width: 75px; height: 75px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;margin-bottom: 25px;">1</div>
                     </div>
                 </div>
-
-                <!-- <div style="height: 50px;">
-                    <div class="card">
-                        <div class="card-content">
-                            <h3 style="color:#008759;font-size:25px;">Users</h3>
-                            <p>Total number of users</p>
-                            <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">1</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-content">
-                            <h3 style="color:#008759;font-size:25px;">Projects</h3>
-                            <p>Total number of projects</p>
-                            <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">1</div>
-                        </div>
-                    </div>
-                </div> -->
 
                 <!-- calendar -->
                 <div class="card">
