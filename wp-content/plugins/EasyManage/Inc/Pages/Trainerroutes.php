@@ -44,7 +44,7 @@ class trainerroutes
                 'user_login' => $request['trainername'],
                 'user_email' => $request['email'],
                 'user_pass' => 'trainer',
-                'role' => 'program_trainer',
+                'role' => 'trainer',
                 'meta_input' => [
                     'is_deactivated' => 0,
                     'is_deleted' => 0

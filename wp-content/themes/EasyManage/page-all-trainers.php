@@ -11,7 +11,7 @@ Template Name: All trainers Page
 
     <div class="main-container">
 
-    <!-- All trainers table -->
+        <!-- All trainers table -->
         <table class="table">
             <thead>
                 <tr style="color:#008759">
@@ -23,75 +23,45 @@ Template Name: All trainers Page
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <i></i> John Doe
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Active</button>
-                    </td>
-                    <td>john@example.com</td>
-                    <td>Trainer</td>
-                    <td>
-                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
+                <?php
+                // Fetch users with role "trainers"
+                $trainers = new WP_User_Query([
+                    'role' => 'trainer'
+                ]);
 
-                <tr>
-                    <td>
-                        <i></i> Jane Smith
-                    </td>
-                    <td>
-                        <button class="btn btn-fail">Inactive</button>
-                    </td>
-                    <td>jane@example.com</td>
-                    <td>Trainer</td>
-                    <td>
-                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
+                if ($trainers->get_total() > 0) {
+                    foreach ($trainers->get_results() as $trainer) {
+                        $trainer_name = $trainer->display_name;
+                        $trainer_status = $trainer->get('user_status') == 0 ? 'Inactive' : 'Active';
+                        $trainer_email = $trainer->user_email;
+                        $trainer_role = 'Trainer';
+                        $trainer_id = $trainer->ID;
+                        $edit_link = 'http://localhost/EasyManage/update-trainee/?trainer_id=' . $trainer_id;
+                        ?>
 
-                <tr>
-                    <td>
-                        <i></i> Joel Kores
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Active</button>
-                    </td>
-                    <td>joel@example.com</td>
-                    <td>Trainer</td>
-                    <td>
-                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
+                        <tr>
+                            <td>
+                                <i></i> <?php echo $trainer_name; ?>
+                            </td>
+                            <td>
+                                <button class="btn <?php echo $trainer_status == 'Active' ? 'btn-success' : 'btn-fail'; ?>">
+                                    <?php echo $trainer_status; ?>
+                                </button>
+                            </td>
+                            <td><?php echo $trainer_email; ?></td>
+                            <td><?php echo $trainer_role; ?></td>
+                            <td>
+                                <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="<?php echo $edit_link; ?>"></a>
+                            </td>
+                        </tr>
 
-                <tr>
-                    <td>
-                        <i></i> Nicholas Kirui
-                    </td>
-                    <td>
-                        <button class="btn btn-fail">Inactive</button>
-                    </td>
-                    <td>nic@example.com</td>
-                    <td>Trainer</td>
-                    <td>
-                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Hope Muriithi
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Active</button>
-                    </td>
-                    <td>hope@example.com</td>
-                    <td>Trainer</td>
-                    <td>
-                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
+                <?php
+                    }
+                } else {
+                    // No trainers found
+                    echo '<tr><td colspan="5">No trainers found.</td></tr>';
+                }
+                ?>
                 <!-- Add more rows as needed -->
             </tbody>
         </table>
@@ -182,7 +152,7 @@ Template Name: All trainers Page
         border-right: 1px solid #e6e6e6;
     }
     a:hover {
-      color: white;
+        color: white;
     }
 </style>
 

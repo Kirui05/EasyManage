@@ -68,7 +68,7 @@ class traineeroutes
                 (string)$user->ID == $trainee_id;
         });
         if (count($trainee) == 0) return new WP_Error('404', 'Hakuna mtu');
-        if ($trainee && $trainee[0]->role == 'program-trainee') {
+        if ($trainee && $trainee[0]->role == 'trainee') {
             $response = [
                 'status' => 'success',
                 'trainee' => [

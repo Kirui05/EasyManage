@@ -22,81 +22,36 @@ Template Name: All users Page
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <i></i> John Doe
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Active</button>
-                    </td>
-                    <td>john@example.com</td>
-                    <td>Administrator</td>
-                    <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
-                        <i style="color:#000;" class="bi bi-person-x"></i>
-                    </td>
-                </tr>
+                <?php
+                // Get all users from the wp_users table
+                $users = get_users();
 
-                <tr>
-                    <td>
-                        <i></i> Jane Smith
-                    </td>
-                    <td>
-                        <button class="btn btn-fail">Inactive</button>
-                    </td>
-                    <td>jane@example.com</td>
-                    <td>Trainer</td>
-                    <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
-                        <i style="color:#000;" class="bi bi-person-x"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Joel Kores
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Active</button>
-                    </td>
-                    <td>joel@example.com</td>
-                    <td>Trainee</td>
-                    <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
-                        <i style="color:#000;" class="bi bi-person-x"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Nicholas Kirui
-                    </td>
-                    <td>
-                        <button class="btn btn-fail">Inactive</button>
-                    </td>
-                    <td>nic@example.com</td>
-                    <td>Program Manager</td>
-                    <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
-                        <i style="color:#000;" class="bi bi-person-x"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Hope Muriithi
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Active</button>
-                    </td>
-                    <td>hope@example.com</td>
-                    <td>Trainer</td>
-                    <td>
-                        <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
-                        <i style="color:#000;" class="bi bi-person-x"></i>
-                    </td>
-                </tr>
-                <!-- Add more rows as needed -->
+                foreach ($users as $user) {
+                    $user_id = $user->ID;
+                    $user_name = $user->display_name;
+                    $user_status = $user->user_status;
+                    $user_email = $user->user_email;
+                    $user_role = implode(', ', get_userdata($user_id)->roles);
+                ?>
+                    <tr>
+                        <td>
+                            <i></i> <?php echo $user_name; ?>
+                        </td>
+                        <td>
+                            <button class="btn <?php echo ($user_status == 0) ? 'btn-fail' : 'btn-success'; ?>">
+                                <?php echo ($user_status == 0) ? 'Inactive' : 'Active'; ?>
+                            </button>
+                        </td>
+                        <td><?php echo $user_email; ?></td>
+                        <td><?php echo $user_role; ?></td>
+                        <td>
+                            <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                            <i style="color:#000;" class="bi bi-person-x"></i>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
             </tbody>
         </table>
 
@@ -185,6 +140,7 @@ Template Name: All users Page
     .table td:last-child {
         border-right: 1px solid #e6e6e6;
     }
+
     a:hover {
       color: white;
     }

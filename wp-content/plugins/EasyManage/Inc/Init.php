@@ -12,7 +12,8 @@ class Init{
             Pages\PMroutes::class,
             Pages\trainerroutes::class,
             Pages\traineeroutes::class,
-            pages\createtables::class,
+            Pages\createtables::class,
+           
         ];
     }
 

@@ -23,76 +23,32 @@ Template Name: All trainees Page
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <i></i> John Doe
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Active</button>
-                    </td>
-                    <td>john@example.com</td>
-                    <td>Trainee</td>
-                    <td>
-                        <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
+                <?php
+                global $wpdb;
+                $trainees = $wpdb->get_results("SELECT display_name, user_email FROM $wpdb->users WHERE ID IN (SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'wp_capabilities' AND meta_value LIKE '%trainee%')");
 
-                <tr>
-                    <td>
-                        <i></i> Jane Smith
-                    </td>
-                    <td>
-                        <button class="btn btn-fail">Inactive</button>
-                    </td>
-                    <td>jane@example.com</td>
-                    <td>Trainee</td>
-                    <td>
-                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Joel Kores
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Active</button>
-                    </td>
-                    <td>joel@example.com</td>
-                    <td>Trainee</td>
-                    <td>
-                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Nicholas Kirui
-                    </td>
-                    <td>
-                        <button class="btn btn-fail">Inactive</button>
-                    </td>
-                    <td>nic@example.com</td>
-                    <td>Trainee</td>
-                    <td>
-                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Hope Muriithi
-                    </td>
-                    <td>
-                        <button class="btn btn-success">Active</button>
-                    </td>
-                    <td>hope@example.com</td>
-                    <td>Trainee</td>
-                    <td>
-                    <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                    </td>
-                </tr>
-                <!-- Add more rows as needed -->
+                foreach ($trainees as $trainee) {
+                    $status = get_user_meta(get_user_by('email', $trainee->user_email)->ID, 'status', true);
+                    $role = get_user_meta(get_user_by('email', $trainee->user_email)->ID, 'wp_capabilities', true);
+                    $role = array_keys($role)[0];
+                    $activeClass = $status === 'active' ? 'success' : 'fail';
+                ?>
+                    <tr>
+                        <td>
+                            <i></i> <?php echo $trainee->display_name; ?>
+                        </td>
+                        <td>
+                            <button class="btn btn-<?php echo $activeClass; ?>"><?php echo ucfirst($status); ?></button>
+                        </td>
+                        <td><?php echo $trainee->user_email; ?></td>
+                        <td><?php echo ucfirst($role); ?></td>
+                        <td>
+                            <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
             </tbody>
         </table>
 
