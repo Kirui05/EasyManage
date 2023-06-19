@@ -6,7 +6,7 @@
 namespace Inc\Pages;
 use WP_Error;
 
-// Class to create program managers endpoints
+// program routes to create program managers endpoints
 class PMroutes
 {
     public function register()
@@ -15,38 +15,37 @@ class PMroutes
     }
     public function register_api_endpoints()
     {
-        register_rest_route('easymanage/v2', '/manager', array(
+        register_rest_route('easymanage/v2', '/program_manager', array(
             'methods' => 'POST',
-            'callback' => array($this, 'create_manager'),
+            'callback' => array($this, 'create_program_manager'),
             // 'permission_callback' => function () {
             //     return current_user_can('manage_options');
             // }
         ));
-        register_rest_route('easymanage/v2', '/manager/(?P<id>\d+)', array(
+        register_rest_route('easymanage/v2', '/program_manager/(?P<id>\d+)', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_manager'),
             // 'permission_callback' => function () {
             //     return current_user_can('manage_options');
             // }
         ));
-        register_rest_route('easymanage/v2', '/manager', array(
+        register_rest_route('easymanage/v2', '/program_manager', array(
             'methods' => 'GET',
-            'callback' => array($this, 'get_all_managers'),
+            'callback' => array($this, 'get_all_program_managers'),
             // 'permission_callback' => function () {
             //     return current_user_can('manage_options');
             // }
         ));
     }
-    public function create_manager($request)
+    public function create_program_manager($request)
     {
         $user = wp_insert_user(
             [
-                'user_login' => $request['managername'],
+                'user_login' => $request['program_manager_name'],
                 'user_email' => $request['email'],
                 'user_pass' => 'manager',
                 'role' => 'program_manager',
                 'meta_input' => [
-                    'phone_number' => $request['phone'],
                     'is_deactivated' => 0,
                     'is_deleted' => 0
                 ]
@@ -56,10 +55,10 @@ class PMroutes
             $error_message = $user->get_error_message();
             return new WP_Error('400', $error_message);
         } else {
-            return rest_ensure_response($user->email);
+            return rest_ensure_response($user);
         }
     }
-    //get a single manager
+    //program to get a single manager
     public function get_manager($request)
     {
         $manager_id = $request->get_param('id');
@@ -68,16 +67,14 @@ class PMroutes
             return
                 (string)$user->ID == $manager_id;
         });
-        if (count($manager) == 0) return new WP_Error('404', 'Hakuna mtu');
+        if (count($manager) == 0) return new WP_Error('404', 'program manager not found');
         if ($manager && $manager[0]->role == 'program-manager') {
-            $phone = get_user_meta($manager_id, 'phone_number', true);
             $response = [
                 'status' => 'success',
                 'manager' => [
                     'id' => $manager[0]->ID,
                     'name' => $manager[0]->user_login,
                     'email' => $manager[0]->user_email,
-                    'phone' => $phone
                 ]
             ];
         } else {
@@ -85,7 +82,7 @@ class PMroutes
         }
         return  rest_ensure_response($response);
     }
-    //get all managers
+    //program to get all managers
     public function get_all_managers($request)
     {
         $managers = get_users(array('role' => 'program_manager'));
@@ -93,12 +90,10 @@ class PMroutes
         if ($managers) {
             foreach ($managers as $manager) {
                 $manager_id = $manager->ID;
-                $phone = get_user_meta($manager_id, 'phone_number', true);
                 $response[] = array(
                     'id' => $manager_id,
                     'name' => $manager->user_login,
                     'email' => $manager->user_email,
-                    'phone' => $phone
                 );
             }
         }

@@ -6,7 +6,7 @@
 namespace Inc\Pages;
 use WP_Error;
 
-// Class to create trainees endpoints
+// program routes to create trainees endpoints
 class PMroutes
 {
     public function register()
@@ -46,7 +46,6 @@ class PMroutes
                 'user_pass' => 'trainee',
                 'role' => 'program_trainee',
                 'meta_input' => [
-                    'phone_number' => $request['phone'],
                     'is_deactivated' => 0,
                     'is_deleted' => 0
                 ]
@@ -59,7 +58,7 @@ class PMroutes
             return rest_ensure_response($user->email);
         }
     }
-    //get a single trainee
+    //program to get a single trainee
     public function get_trainee($request)
     {
         $trainee_id = $request->get_param('id');
@@ -70,40 +69,36 @@ class PMroutes
         });
         if (count($trainee) == 0) return new WP_Error('404', 'Hakuna mtu');
         if ($trainee && $trainee[0]->role == 'program-trainee') {
-            $phone = get_user_meta($trainee_id, 'phone_number', true);
             $response = [
                 'status' => 'success',
                 'trainee' => [
                     'id' => $trainee[0]->ID,
                     'name' => $trainee[0]->user_login,
                     'email' => $trainee[0]->user_email,
-                    'phone' => $phone
                 ]
             ];
         } else {
-            $response = new WP_Error('404', 'Program trainee not found');
+            $response = new WP_Error('404', 'trainee not found');
         }
         return  rest_ensure_response($response);
     }
-    //get all trainees
+    //program to get all trainees
     public function get_all_trainees($request)
     {
-        $trainees = get_users(array('role' => 'program_trainee'));
+        $trainees = get_users(array('role' => 'trainee'));
         $response = array();
         if ($trainees) {
             foreach ($trainees as $trainee) {
                 $trainee_id = $trainee->ID;
-                $phone = get_user_meta($trainee_id, 'phone_number', true);
                 $response[] = array(
                     'id' => $trainee_id,
                     'name' => $trainee->user_login,
                     'email' => $trainee->user_email,
-                    'phone' => $phone
                 );
             }
         }
         if (empty($response)) {
-            $response = new WP_Error('404', 'No program trainees found');
+            $response = new WP_Error('404', 'trainees not found');
         }
         return rest_ensure_response($response);
     }

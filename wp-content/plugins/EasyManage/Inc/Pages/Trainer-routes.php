@@ -6,7 +6,7 @@
 namespace Inc\Pages;
 use WP_Error;
 
-// Class to create trainers endpoints
+// program routes to create trainers endpoints
 class PMroutes
 {
     public function register()
@@ -46,7 +46,6 @@ class PMroutes
                 'user_pass' => 'trainer',
                 'role' => 'program_trainer',
                 'meta_input' => [
-                    'phone_number' => $request['phone'],
                     'is_deactivated' => 0,
                     'is_deleted' => 0
                 ]
@@ -59,7 +58,7 @@ class PMroutes
             return rest_ensure_response($user->email);
         }
     }
-    //get a single trainer
+    //program to get a single trainer
     public function get_trainer($request)
     {
         $trainer_id = $request->get_param('id');
@@ -70,40 +69,36 @@ class PMroutes
         });
         if (count($trainer) == 0) return new WP_Error('404', 'Hakuna mtu');
         if ($trainer && $trainer[0]->role == 'program-trainer') {
-            $phone = get_user_meta($trainer_id, 'phone_number', true);
             $response = [
                 'status' => 'success',
                 'trainer' => [
                     'id' => $trainer[0]->ID,
                     'name' => $trainer[0]->user_login,
                     'email' => $trainer[0]->user_email,
-                    'phone' => $phone
                 ]
             ];
         } else {
-            $response = new WP_Error('404', 'Program trainer not found');
+            $response = new WP_Error('404', 'trainer not found');
         }
         return  rest_ensure_response($response);
     }
-    //get all trainers
+    //program to get all trainers
     public function get_all_trainers($request)
     {
-        $trainers = get_users(array('role' => 'program_trainer'));
+        $trainers = get_users(array('role' => 'trainer'));
         $response = array();
         if ($trainers) {
             foreach ($trainers as $trainer) {
                 $trainer_id = $trainer->ID;
-                $phone = get_user_meta($trainer_id, 'phone_number', true);
                 $response[] = array(
                     'id' => $trainer_id,
                     'name' => $trainer->user_login,
                     'email' => $trainer->user_email,
-                    'phone' => $phone
                 );
             }
         }
         if (empty($response)) {
-            $response = new WP_Error('404', 'No program trainers found');
+            $response = new WP_Error('404', 'trainers not found');
         }
         return rest_ensure_response($response);
     }
