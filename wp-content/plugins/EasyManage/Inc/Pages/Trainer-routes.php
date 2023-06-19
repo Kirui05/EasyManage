@@ -7,7 +7,7 @@ namespace Inc\Pages;
 use WP_Error;
 
 // program routes to create trainers endpoints
-class PMroutes
+class trainerroutes
 {
     public function register()
     {

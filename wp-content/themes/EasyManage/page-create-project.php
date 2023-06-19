@@ -41,10 +41,19 @@ Template Name: Create project Page
                         </div>
                         <div class="input1">
                             <label for="">Assignee</label>
-                            <div class="icons1">
+                            <select class="assignee" id="assignee" name="assignee" multiple>
+                                <option value="assignee1">Kalusi</option>
+                                <option value="assignee2">Mwaniki</option>
+                                <option value="assignee3">Kirui</option>
+                                <option value="assignee4">Kimani</option>
+                                <option value="assignee5">Muriithi</option>
+                                <option value="assignee6">Mwende</option>
+                                <option value="assignee7">Kores</option>
+                            </select>
+                            <!-- <div class="icons1">
                                 <ion-icon name="person-outline"></ion-icon>
                                 <input type="text" placeholder="Enter assignee" name="assignee" required>
-                            </div>
+                            </div> -->
                         </div>
                         <button type="submit" class="btnlog" name="login-submit">Create</button>
                     </div>
