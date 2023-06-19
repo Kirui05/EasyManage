@@ -13,7 +13,6 @@ class Init{
             Pages\trainerroutes::class,
             Pages\traineeroutes::class,
             Pages\createtables::class,
-           
         ];
     }
 

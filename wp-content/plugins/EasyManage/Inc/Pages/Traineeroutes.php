@@ -41,10 +41,10 @@ class traineeroutes
     {
         $user = wp_insert_user(
             [
-                'user_login' => $request['traineename'],
+                'user_login' => $request['trainee_name'],
                 'user_email' => $request['email'],
                 'user_pass' => 'trainee',
-                'role' => 'program_trainee',
+                'role' => 'trainee',
                 'meta_input' => [
                     'is_deactivated' => 0,
                     'is_deleted' => 0
@@ -67,7 +67,7 @@ class traineeroutes
             return
                 (string)$user->ID == $trainee_id;
         });
-        if (count($trainee) == 0) return new WP_Error('404', 'Hakuna mtu');
+        if (count($trainee) == 0) return new WP_Error('404', 'trainee not found');
         if ($trainee && $trainee[0]->role == 'trainee') {
             $response = [
                 'status' => 'success',

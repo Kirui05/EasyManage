@@ -41,7 +41,7 @@ class trainerroutes
     {
         $user = wp_insert_user(
             [
-                'user_login' => $request['trainername'],
+                'user_login' => $request['trainer_name'],
                 'user_email' => $request['email'],
                 'user_pass' => 'trainer',
                 'role' => 'trainer',
@@ -67,8 +67,8 @@ class trainerroutes
             return
                 (string)$user->ID == $trainer_id;
         });
-        if (count($trainer) == 0) return new WP_Error('404', 'Hakuna mtu');
-        if ($trainer && $trainer[0]->role == 'program-trainer') {
+        if (count($trainer) == 0) return new WP_Error('404', 'trainer not found');
+        if ($trainer && $trainer[0]->role == 'trainer') {
             $response = [
                 'status' => 'success',
                 'trainer' => [

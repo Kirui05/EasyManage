@@ -31,7 +31,7 @@ class PMroutes
         ));
         register_rest_route('easymanage/v2', '/program_manager', array(
             'methods' => 'GET',
-            'callback' => array($this, 'get_all_program_managers'),
+            'callback' => array($this, 'get_all_managers'),
             // 'permission_callback' => function () {
             //     return current_user_can('manage_options');
             // }
@@ -43,7 +43,7 @@ class PMroutes
             [
                 'user_login' => $request['program_manager_name'],
                 'user_email' => $request['email'],
-                'user_pass' => 'manager',
+                'user_pass' => 'program_manager',
                 'role' => 'program_manager',
                 'meta_input' => [
                     'is_deactivated' => 0,

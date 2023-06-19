@@ -7,7 +7,13 @@ Template Name: Create project Page
 <?php get_header() ?>
 
 <main>
-    <?php get_sidebar() ?>
+    <?php get_sidebar(); 
+    $trainees_query = new WP_User_Query([
+        'role' => 'trainee'
+    ]);
+
+    $trainees = $trainees_query->get_results();
+    ?>
 
     <div class="main-container">
 
@@ -28,32 +34,23 @@ Template Name: Create project Page
                         <div class="input1">
                             <label for="">Project description</label>
                             <div class="icons1">
-                                <textarea name="text" placeholder="Enter project description" id="p_desc" cols="74" rows="2" style="border: 1px solid #b8b6b6;resize: none;	border-radius: 0.375em 0.375em 0.375em 0.375em;	background-color: #f8f8f8;
-"></textarea>
+                                <textarea name="text" placeholder="Enter project description" id="p_desc" cols="74" rows="2" style="border: 1px solid #b8b6b6;resize: none;	border-radius: 0.375em 0.375em 0.375em 0.375em;	background-color: #f8f8f8;"></textarea>
                             </div>
                         </div>
                         <div class="input1">
                             <label for="">Due date</label>
                             <div class="icons1">
                                 <ion-icon name="calendar-outline"></ion-icon>
-                                <input type="date" placeholder="" name="date" required>
+                                <input type="date" placeholder="" name="date" min="<?php echo esc_attr(date('Y-m-d'));?>" required>
                             </div>
                         </div>
                         <div class="input1">
                             <label for="">Assignee</label>
                             <select class="assignee" id="assignee" name="assignee" multiple>
-                                <option value="assignee1">Kalusi</option>
-                                <option value="assignee2">Mwaniki</option>
-                                <option value="assignee3">Kirui</option>
-                                <option value="assignee4">Kimani</option>
-                                <option value="assignee5">Muriithi</option>
-                                <option value="assignee6">Mwende</option>
-                                <option value="assignee7">Kores</option>
+                                <?php foreach ($trainees as $trainee) : ?>
+                                    <option value="<?php echo esc_attr($trainee->ID); ?>"><?php echo esc_html($trainee->display_name); ?></option>
+                                <?php endforeach; ?>
                             </select>
-                            <!-- <div class="icons1">
-                                <ion-icon name="person-outline"></ion-icon>
-                                <input type="text" placeholder="Enter assignee" name="assignee" required>
-                            </div> -->
                         </div>
                         <button type="submit" class="btnlog" name="login-submit">Create</button>
                     </div>
