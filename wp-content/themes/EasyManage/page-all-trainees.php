@@ -10,48 +10,48 @@ Template Name: All trainees Page
     <?php get_sidebar() ?>
 
     <div class="main-container">
-
-        <!-- All trainees table -->
-        <table class="table">
-            <thead>
-                <tr style="color:#008759">
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                global $wpdb;
-                $trainees = $wpdb->get_results("SELECT display_name, user_email FROM $wpdb->users WHERE ID IN (SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'wp_capabilities' AND meta_value LIKE '%trainee%')");
-
-                foreach ($trainees as $trainee) {
-                    $status = get_user_meta(get_user_by('email', $trainee->user_email)->ID, 'status', true);
-                    $role = get_user_meta(get_user_by('email', $trainee->user_email)->ID, 'wp_capabilities', true);
-                    $role = array_keys($role)[0];
-                    $activeClass = $status === 'active' ? 'success' : 'fail';
-                ?>
-                    <tr>
-                        <td>
-                            <i></i> <?php echo $trainee->display_name; ?>
-                        </td>
-                        <td>
-                            <button class="btn btn-<?php echo $activeClass; ?>"><?php echo ucfirst($status); ?></button>
-                        </td>
-                        <td><?php echo $trainee->user_email; ?></td>
-                        <td><?php echo ucfirst($role); ?></td>
-                        <td>
-                            <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                        </td>
+        <div class="scroll-container">
+            <!-- All trainees table -->
+            <table class="table">
+                <thead>
+                    <tr style="color:#008759">
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php
+                    global $wpdb;
+                    $trainees = $wpdb->get_results("SELECT display_name, user_email FROM $wpdb->users WHERE ID IN (SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'wp_capabilities' AND meta_value LIKE '%trainee%')");
 
+                    foreach ($trainees as $trainee) {
+                        $status = get_user_meta(get_user_by('email', $trainee->user_email)->ID, 'status', true);
+                        $role = get_user_meta(get_user_by('email', $trainee->user_email)->ID, 'wp_capabilities', true);
+                        $role = array_keys($role)[0];
+                        $activeClass = $status === 'active' ? 'success' : 'fail';
+                    ?>
+                        <tr>
+                            <td>
+                                <i></i> <?php echo $trainee->display_name; ?>
+                            </td>
+                            <td>
+                                <button class="btn btn-<?php echo $activeClass; ?>"><?php echo ucfirst($status); ?></button>
+                            </td>
+                            <td><?php echo $trainee->user_email; ?></td>
+                            <td><?php echo ucfirst($role); ?></td>
+                            <td>
+                                <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </main>
@@ -70,6 +70,11 @@ Template Name: All trainees Page
         width: 100%;
         height: 82vh;
         background-color: #f8f8f8;
+        overflow: auto; /* Added to enable scrolling */
+    }
+
+    .scroll-container {
+        min-height: 100%; /* Added to ensure table height fills the container */
     }
 
     .table {

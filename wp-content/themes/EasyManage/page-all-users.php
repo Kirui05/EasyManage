@@ -10,51 +10,51 @@ Template Name: All users Page
     <?php get_sidebar() ?>
 
     <div class="main-container">
-
-        <table class="table">
-            <thead>
-                <tr style="color:#008759">
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Get all users from the wp_users table
-                $users = get_users();
-
-                foreach ($users as $user) {
-                    $user_id = $user->ID;
-                    $user_name = $user->display_name;
-                    $user_status = $user->user_status;
-                    $user_email = $user->user_email;
-                    $user_role = implode(', ', get_userdata($user_id)->roles);
-                ?>
-                    <tr>
-                        <td>
-                            <i></i> <?php echo $user_name; ?>
-                        </td>
-                        <td>
-                            <button class="btn <?php echo ($user_status == 0) ? 'btn-fail' : 'btn-success'; ?>">
-                                <?php echo ($user_status == 0) ? 'Inactive' : 'Active'; ?>
-                            </button>
-                        </td>
-                        <td><?php echo $user_email; ?></td>
-                        <td><?php echo $user_role; ?></td>
-                        <td>
-                            <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
-                            <i style="color:#000;" class="bi bi-person-x"></i>
-                        </td>
+        <div class="scrollable-table">
+            <table class="table">
+                <thead>
+                    <tr style="color:#008759">
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php
+                    // Get all users from the wp_users table
+                    $users = get_users();
 
+                    foreach ($users as $user) {
+                        $user_id = $user->ID;
+                        $user_name = $user->display_name;
+                        $user_status = $user->user_status;
+                        $user_email = $user->user_email;
+                        $user_role = implode(', ', get_userdata($user_id)->roles);
+                    ?>
+                        <tr>
+                            <td>
+                                <i></i> <?php echo $user_name; ?>
+                            </td>
+                            <td>
+                                <button class="btn <?php echo ($user_status == 0) ? 'btn-fail' : 'btn-success'; ?>">
+                                    <?php echo ($user_status == 0) ? 'Inactive' : 'Active'; ?>
+                                </button>
+                            </td>
+                            <td><?php echo $user_email; ?></td>
+                            <td><?php echo $user_role; ?></td>
+                            <td>
+                                <i style="color:#000;margin-right:5px;" class="bi bi-pencil-square"></i>
+                                <i style="color:#000;" class="bi bi-person-x"></i>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </main>
@@ -73,6 +73,17 @@ Template Name: All users Page
         width: 100%;
         height: 82vh;
         background-color: #f8f8f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Add this line to hide the overflow */
+    }
+
+    .scrollable-table {
+        max-height: 80vh;
+        overflow-y: auto;
+        width: calc(100% - 30px); /* Adjust the width as needed */
+        margin: 0 auto; /* Center the table horizontally */
     }
 
     .table {
@@ -142,7 +153,7 @@ Template Name: All users Page
     }
 
     a:hover {
-      color: white;
+        color: white;
     }
 </style>
 

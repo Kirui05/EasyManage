@@ -9,7 +9,7 @@ Template Name: All trainers Page
 
     <?php get_sidebar() ?>
 
-    <div class="main-container">
+    <div class="main-container" style="overflow: auto;">
 
         <!-- All trainers table -->
         <table class="table">
