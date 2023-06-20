@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Create stack Page
+Template Name: Update stack Page
 */
 ?>
 
@@ -20,7 +20,7 @@ Template Name: Create stack Page
             <div class="logcover">
                 <form action="" method="POST">
                     <div class="form">
-                        <h2>Create Stack</h2>
+                        <h2>Update Stack</h2>
 
                         <div class="input1">
                             <label for="">Stack name</label>
@@ -58,7 +58,7 @@ Template Name: Create stack Page
                                 <input type="date" placeholder="" name="date" min="<?php echo esc_attr(date('Y-m-d')); ?>" required>
                             </div>
                         </div>
-                        <button type="submit" class="btnlog" name="login-submit">Create</button>
+                        <button type="submit" class="btnlog" name="login-submit">Update</button>
                     </div>
                 </form>
             </div>
