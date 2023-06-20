@@ -8,13 +8,107 @@ namespace Inc\Pages;
 
 use WP_Error;
 
-class projectroutes {
-    public function register(){
+class projectroutes
+{
+    public function register()
+    {
         add_action('rest_api_init', 'register_project_endpoints');
     }
-    public function register_project_endpoints(){
-        resister_rest_route('easymanage/v2', '/project', array(
-            'methods' => 
-        ))
+    public function register_project_endpoints()
+    {
+        register_rest_route('easymanage/v2', '/project', array(
+            'methods' => 'POST',
+            'callback' => array($this, 'create_project'),
+        ));
+
+        register_rest_route('easymanage/v2', 'project/(?P<id>\d+)', array(
+            'method' => 'GET',
+            'callback' => array($this, 'get_project'),
+        ));
+
+        register_rest_route('easymanage/v2', '/projects', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'get_all_projects'),
+        ));
+
+        register_rest_route('easymanage/v2', 'project/(?P<id>\d+)', array(
+            'methods' => 'PATCH',
+            'callback' => array($this, 'update_project'),
+        ));
+    }
+
+    public function create_project($request)
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'projects';
+
+        $project_name = $request->get_param('project_name');
+        $due_date = $request->get_param('due_date');
+        $status = $request->get_param('status');
+        $project_details = $request->get_param('project_details');
+        $assignee = $request->get_param('assignee');
+
+        $data = array(
+            'project_name' => $project_name,
+            'due_date' => $due_date,
+            'status' => $status,
+            'project_details' => $project_details,
+            'assignee' => $assignee,
+        );
+
+        $wpdb->insert($table_name, $data);
+
+        return rest_ensure_response($data);
+    }
+
+    public function get_all_projects($request)
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'projects';
+
+        $projects = $wpdb->get_results("SELECT * FROM $table_name");
+
+        return rest_ensure_response($projects);
+    }
+    public function get_project($request)
+    {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . 'projects';
+        $project_id = $request->get_param('id');
+
+        $project = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $project_id));
+
+        if (!$project) {
+            return new WP_Error('project_not_found', 'project not found', array('status' => 404));
+        }
+        return rest_ensure_response($project);
+    }
+    public function update_project($request)
+    {
+
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'projects';
+
+        $project_id = $request->get_param('project_id');
+        $project_name = $request->get_param('project_name');
+        $due_date = $request->get_param('due_date');
+        $status = $request->get_param('status');
+        $project_details = $request->get_param('project_details');
+        $assignee = $request->get_param('assignee');
+
+        $data = array(
+            'project_name' => $project_name,
+            'due_date' => $due_date,
+            'status' => $status,
+            'project_details' => $project_details,
+            'assignee' => $assignee,
+        );
+
+        $where = array('id' => $project_id);
+
+        $wpdb->update($table_name, $data, $where);
+
+        return rest_ensure_response($data);
     }
 }
