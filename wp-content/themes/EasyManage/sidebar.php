@@ -15,6 +15,7 @@ $program_manager_menu = array(
     array('icon' => 'bi bi-grid', 'text' => 'Dashboard', 'link' => 'http://localhost/EasyManage/pm-dashboard/'),
     array('icon' => 'bi bi-people', 'text' => 'View All Trainers', 'link' => 'http://localhost/EasyManage/all-trainers/'),
     array('icon' => 'bi bi-person-plus', 'text' => 'Create Trainer', 'link' => 'http://localhost/EasyManage/create-trainer/'),
+    array('icon' => 'bi bi-layers', 'text' => 'Create Stack', 'link' => 'http://localhost/EasyManage/create-stack/'),
 );
 
 $trainer_menu = array(

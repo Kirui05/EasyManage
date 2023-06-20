@@ -1,9 +1,11 @@
 <?php
+
 /**
  * @package EasyManage
  */
 
 namespace Inc\Pages;
+
 use WP_Error;
 
 // program routes to create trainers endpoints
@@ -58,28 +60,24 @@ class trainerroutes
             return rest_ensure_response($user->email);
         }
     }
-    //program to get a single trainer
+    //program to get one trainer
     public function get_trainer($request)
     {
         $trainer_id = $request->get_param('id');
-        $trainer = get_users();
-        $trainer = array_filter($trainer, function ($user) use ($trainer_id) {
-            return
-                (string)$user->ID == $trainer_id;
-        });
-        if (count($trainer) == 0) return new WP_Error('404', 'trainer not found');
-        if ($trainer && $trainer[0]->role == 'trainer') {
-            $response = [
-                'status' => 'success',
-                'trainer' => [
-                    'id' => $trainer[0]->ID,
-                    'name' => $trainer[0]->user_login,
-                    'email' => $trainer[0]->user_email,
-                ]
-            ];
-        } else {
-            $response = new WP_Error('404', 'trainer not found');
+        $trainer = get_user_by('ID', $trainer_id);
+
+        if (!$trainer) {
+            return new WP_Error('404', 'trainer not found');
         }
+        $response = [
+            'status' => 'success',
+            'trainer' => [
+                'id' => $trainer->ID,
+                'name' => $trainer->user_login,
+                'email' => $trainer->user_email,
+                'password' => $trainer->user_pass,
+            ]
+        ];
         return  rest_ensure_response($response);
     }
     //program to get all trainers

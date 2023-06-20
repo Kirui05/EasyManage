@@ -1,9 +1,11 @@
 <?php
+
 /**
  * @package EasyManage
  */
 
 namespace Inc\Pages;
+
 use WP_Error;
 
 // program routes to create program managers endpoints
@@ -58,28 +60,25 @@ class PMroutes
             return rest_ensure_response($user);
         }
     }
-    //program to get a single manager
+    //program to get one program manager
     public function get_manager($request)
     {
         $manager_id = $request->get_param('id');
-        $manager = get_users();
-        $manager = array_filter($manager, function ($user) use ($manager_id) {
-            return
-                (string)$user->ID == $manager_id;
-        });
-        if (count($manager) == 0) return new WP_Error('404', 'program manager not found');
-        if ($manager && $manager[0]->role == 'program-manager') {
-            $response = [
-                'status' => 'success',
-                'manager' => [
-                    'id' => $manager[0]->ID,
-                    'name' => $manager[0]->user_login,
-                    'email' => $manager[0]->user_email,
-                ]
-            ];
-        } else {
-            $response = new WP_Error('404', 'Program manager not found');
+        $manager = get_user_by('ID', $manager_id);
+
+        if (!$manager) {
+            return new WP_Error('404', 'trainer not found');
         }
+        $response = [
+            'status' => 'success',
+            'manager' => [
+                'id' => $manager->ID,
+                'name' => $manager->user_login,
+                'email' => $manager->user_email,
+                'password' => $manager->user_pass,
+            ]
+        ];
+
         return  rest_ensure_response($response);
     }
     //program to get all managers

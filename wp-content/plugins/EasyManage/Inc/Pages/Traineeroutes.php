@@ -58,28 +58,24 @@ class traineeroutes
             return rest_ensure_response($user->email);
         }
     }
-    //program to get a single trainee
+    //program to get one trainee
     public function get_trainee($request)
     {
         $trainee_id = $request->get_param('id');
-        $trainee = get_users();
-        $trainee = array_filter($trainee, function ($user) use ($trainee_id) {
-            return
-                (string)$user->ID == $trainee_id;
-        });
-        if (count($trainee) == 0) return new WP_Error('404', 'trainee not found');
-        if ($trainee && $trainee[0]->role == 'trainee') {
-            $response = [
-                'status' => 'success',
-                'trainee' => [
-                    'id' => $trainee[0]->ID,
-                    'name' => $trainee[0]->user_login,
-                    'email' => $trainee[0]->user_email,
-                ]
-            ];
-        } else {
-            $response = new WP_Error('404', 'trainee not found');
+        $trainee = get_user_by('ID', $trainee_id);
+
+        if (!$trainee) {
+            return new WP_Error('404', 'trainee not found');
         }
+        $response = [
+            'status' => 'success',
+            'trainee' => [
+                'id' => $trainee->ID,
+                'name' => $trainee->user_login,
+                'email' => $trainee->user_email,
+                'password' => $trainee->user_pass,
+            ]
+        ];
         return  rest_ensure_response($response);
     }
     //program to get all trainees
