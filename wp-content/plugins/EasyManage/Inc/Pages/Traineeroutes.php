@@ -4,6 +4,7 @@
  */
 
 namespace Inc\Pages;
+
 use WP_Error;
 
 // program routes to create trainees endpoints

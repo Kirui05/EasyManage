@@ -67,7 +67,7 @@ class PMroutes
         $manager = get_user_by('ID', $manager_id);
 
         if (!$manager) {
-            return new WP_Error('404', 'trainer not found');
+            return new WP_Error('404', 'program manager not found');
         }
         $response = [
             'status' => 'success',
@@ -97,7 +97,7 @@ class PMroutes
             }
         }
         if (empty($response)) {
-            $response = new WP_Error('404', 'No program managers found');
+            $response = new WP_Error('404', 'program managers not found');
         }
         return rest_ensure_response($response);
     }

@@ -13,8 +13,8 @@ class Init{
             Pages\trainerroutes::class,
             Pages\traineeroutes::class,
             Pages\createtables::class,
-            // Pages\projectroutes::class,
-            // Pages\stacksroutes::class,
+            Pages\projectroutes::class,
+            Pages\stacksroutes::class,
         ];
     }
 
