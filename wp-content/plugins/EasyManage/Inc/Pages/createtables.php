@@ -25,10 +25,11 @@ class createtables
 
         $sql = "CREATE TABLE $table_name (
             id INT(11) NOT NULL AUTO_INCREMENT,
-            trainer_name VARCHAR(255) NOT NULL,
-            assigned_to VARCHAR(255) NOT NULL,
+            stack_name VARCHAR(255) NOT NULL,
+            location VARCHAR(255) NOT NULL,
             start_date DATE NOT NULL,
             end_date DATE NOT NULL,
+            assignee VARCHAR(255) NOT NULL,
             PRIMARY KEY (id)
         ) $charset_collate;";
 
@@ -45,8 +46,9 @@ class createtables
         $sql = "CREATE TABLE $table_name (
             id INT NOT NULL AUTO_INCREMENT,
             project_name VARCHAR(255) NOT NULL,
+            due_date DATE NOT NULL,
+            is_completed int NOT NULL default 0,
             project_description TEXT,
-            due_date DATE,
             assignee VARCHAR(255),
             PRIMARY KEY (id)
         ) $charset_collate;";

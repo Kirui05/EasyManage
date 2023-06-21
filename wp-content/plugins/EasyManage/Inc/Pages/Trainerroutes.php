@@ -38,6 +38,10 @@ class trainerroutes
             //     return current_user_can('manage_options');
             // }
         ));
+        register_rest_route('easymanage/v2', '/trainer/(?P<id>\d+)', array(
+            'methods' => 'DELETE',
+            'callback' => array($this, 'soft_delete_trainer'),
+        ));
     }
     public function create_trainer($request)
     {
@@ -80,6 +84,21 @@ class trainerroutes
         ];
         return  rest_ensure_response($response);
     }
+    public function soft_delete_trainer($request)
+    {
+        $trainer_id = $request->get_param('id');
+        $trainer = get_user_by('ID', $trainer_id);
+
+        if (!$trainer) {
+            return new WP_Error('404', 'trainer not found');
+        }
+
+        // Set the value of "is_deleted" to 1
+        update_user_meta($trainer_id, 'is_deleted', 1);
+
+        return rest_ensure_response('trainer deleted successfully.');
+    }
+
     //program to get all trainers
     public function get_all_trainers($request)
     {

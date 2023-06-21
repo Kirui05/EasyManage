@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @package EasyManage
  */
@@ -15,30 +14,30 @@ class PMroutes
     {
         add_action('rest_api_init', array($this, 'register_api_endpoints'));
     }
+
     public function register_api_endpoints()
     {
         register_rest_route('easymanage/v2', '/program_manager', array(
             'methods' => 'POST',
             'callback' => array($this, 'create_program_manager'),
-            // 'permission_callback' => function () {
-            //     return current_user_can('manage_options');
-            // }
         ));
+
         register_rest_route('easymanage/v2', '/program_manager/(?P<id>\d+)', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_manager'),
-            // 'permission_callback' => function () {
-            //     return current_user_can('manage_options');
-            // }
         ));
+
+        register_rest_route('easymanage/v2', '/program_manager/(?P<id>\d+)', array(
+            'methods' => 'DELETE',
+            'callback' => array($this, 'soft_delete_manager'),
+        ));
+
         register_rest_route('easymanage/v2', '/program_manager', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_all_managers'),
-            // 'permission_callback' => function () {
-            //     return current_user_can('manage_options');
-            // }
         ));
     }
+
     public function create_program_manager($request)
     {
         $user = wp_insert_user(
@@ -60,14 +59,14 @@ class PMroutes
             return rest_ensure_response($user);
         }
     }
-    //program to get one program manager
+
     public function get_manager($request)
     {
         $manager_id = $request->get_param('id');
         $manager = get_user_by('ID', $manager_id);
 
         if (!$manager) {
-            return new WP_Error('404', 'program manager not found');
+            return new WP_Error('404', 'Program manager not found');
         }
         $response = [
             'status' => 'success',
@@ -81,7 +80,22 @@ class PMroutes
 
         return  rest_ensure_response($response);
     }
-    //program to get all managers
+
+    public function soft_delete_manager($request)
+    {
+        $manager_id = $request->get_param('id');
+        $manager = get_user_by('ID', $manager_id);
+
+        if (!$manager) {
+            return new WP_Error('404', 'Program manager not found');
+        }
+
+        // Set the value of "is_deleted" to 1
+        update_user_meta($manager_id, 'is_deleted', 1);
+
+        return rest_ensure_response('Program manager deleted successfully.');
+    }
+
     public function get_all_managers($request)
     {
         $managers = get_users(array('role' => 'program_manager'));
@@ -97,7 +111,7 @@ class PMroutes
             }
         }
         if (empty($response)) {
-            $response = new WP_Error('404', 'program managers not found');
+            $response = new WP_Error('404', 'Program managers not found');
         }
         return rest_ensure_response($response);
     }

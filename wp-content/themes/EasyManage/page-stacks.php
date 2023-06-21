@@ -23,85 +23,30 @@ Template Name: Stacks Page
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <i></i> C#
-                    </td>
-                    <td> Dekut </td>
-                    <td> Joy </td>
-                    <td>April 4, 2023</td>
-                    <td>June 30, 2023</td>
-                    <td>
-                        <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
-                    </td>
-                </tr>
+                <?php
+                global $wpdb;
+                $stacks = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}stacks", ARRAY_A);
 
-                <tr>
-                    <td>
-                        <i></i> Angular
-                    </td>
-                    <td> KDS </td>
-                    <td> Nicholas </td>
-                    <td>April 4, 2023</td>
-                    <td>June 30, 2023</td>
-                    <td>
-                        <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> WordPress
-                    </td>
-                    <td> Kirinyaga </td>
-                    <td> Brian </td>
-                    <td>April 4, 2023</td>
-                    <td>June 30, 2023</td>
-                    <td>
-                        <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Angular
-                    </td>
-                    <td> KDS </td>
-                    <td>Joy </td>
-                    <td>April 4, 2023</td>
-                    <td>June 30, 2023</td>
-                    <td>
-                        <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> QA/QE
-                    </td>
-                    <td> Kirinyaga </td>
-                    <td>Nicholas</td>
-                    <td>April 4, 2023</td>
-                    <td>June 30, 2023</td>
-                    <td>
-                        <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> WordPress
-                    </td>
-                    <td> Dekut </td>
-                    <td> Brian</td>
-                    <td>April 4, 2023</td>
-                    <td>June 30, 2023</td>
-                    <td>
-                        <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
-                    </td>
-                </tr>
-
-                <!-- Add more rows as needed -->
+                foreach ($stacks as $stack) {
+                    $stack_name = $stack['stack_name'];
+                    $location = $stack['location'];
+                    $assignee = $stack['assignee'];
+                    $start_date = $stack['start_date'];
+                    $end_date = $stack['end_date'];
+                ?>
+                    <tr>
+                        <td>
+                            <i></i> <?php echo $stack_name; ?>
+                        </td>
+                        <td><?php echo $location; ?></td>
+                        <td><?php echo $assignee; ?></td>
+                        <td><?php echo $start_date; ?></td>
+                        <td><?php echo $end_date; ?></td>
+                        <td>
+                            <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
+                        </td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
 

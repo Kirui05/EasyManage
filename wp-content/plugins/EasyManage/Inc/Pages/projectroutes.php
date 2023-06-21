@@ -12,7 +12,7 @@ class projectroutes
 {
     public function register()
     {
-        add_action('rest_api_init', 'register_project_endpoints');
+        add_action('rest_api_init', [$this,'register_project_endpoints']);
     }
     public function register_project_endpoints()
     {
@@ -21,7 +21,7 @@ class projectroutes
             'callback' => array($this, 'create_project'),
         ));
 
-        register_rest_route('easymanage/v2', 'project/(?P<id>\d+)', array(
+        register_rest_route('easymanage/v2', '/project/(?P<id>\d+)', array(
             'method' => 'GET',
             'callback' => array($this, 'get_project'),
         ));
@@ -31,9 +31,13 @@ class projectroutes
             'callback' => array($this, 'get_all_projects'),
         ));
 
-        register_rest_route('easymanage/v2', 'project/(?P<id>\d+)', array(
+        register_rest_route('easymanage/v2', '/project/(?P<id>\d+)', array(
             'methods' => 'PATCH',
             'callback' => array($this, 'update_project'),
+        ));
+        register_rest_route('easymanage/v2', '/project/(?P<id>\d+)', array(
+            'methods' => 'DELETE',
+            'callback' => array($this, 'soft_delete_project'),
         ));
     }
 
@@ -44,23 +48,35 @@ class projectroutes
 
         $project_name = $request->get_param('project_name');
         $due_date = $request->get_param('due_date');
-        $status = $request->get_param('status');
         $project_details = $request->get_param('project_details');
         $assignee = $request->get_param('assignee');
-
+        
         $data = array(
             'project_name' => $project_name,
             'due_date' => $due_date,
-            'status' => $status,
             'project_details' => $project_details,
             'assignee' => $assignee,
         );
-
+        
         $wpdb->insert($table_name, $data);
 
         return rest_ensure_response($data);
     }
 
+    public function soft_delete_project($request)
+    {
+        $project_id = $request->get_param('id');
+        $project = get_user_by('ID', $project_id);
+
+        if (!$project) {
+            return new WP_Error('404', 'project not found');
+        }
+
+        // Set the value of "is_deleted" to 1
+        update_user_meta($project_id, 'is_deleted', 1);
+
+        return rest_ensure_response('project deleted successfully.');
+    }
     public function get_all_projects($request)
     {
         global $wpdb;
@@ -93,14 +109,12 @@ class projectroutes
         $project_id = $request->get_param('project_id');
         $project_name = $request->get_param('project_name');
         $due_date = $request->get_param('due_date');
-        $status = $request->get_param('status');
         $project_details = $request->get_param('project_details');
         $assignee = $request->get_param('assignee');
 
         $data = array(
             'project_name' => $project_name,
             'due_date' => $due_date,
-            'status' => $status,
             'project_details' => $project_details,
             'assignee' => $assignee,
         );

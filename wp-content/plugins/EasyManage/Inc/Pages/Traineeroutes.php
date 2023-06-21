@@ -37,6 +37,10 @@ class traineeroutes
             //     return current_user_can('manage_options');
             // }
         ));
+        register_rest_route('easymanage/v2', '/trainee/(?P<id>\d+)', array(
+            'methods' => 'DELETE',
+            'callback' => array($this, 'soft_delete_trainee'),
+        ));
     }
     public function create_trainee($request)
     {
@@ -78,6 +82,20 @@ class traineeroutes
             ]
         ];
         return  rest_ensure_response($response);
+    }
+    public function soft_delete_trainee($request)
+    {
+        $trainee_id = $request->get_param('id');
+        $trainee = get_user_by('ID', $trainee_id);
+
+        if (!$trainee) {
+            return new WP_Error('404', 'trainee not found');
+        }
+
+        // Set the value of "is_deleted" to 1
+        update_user_meta($trainee_id, 'is_deleted', 1);
+
+        return rest_ensure_response('trainee deleted successfully.');
     }
     //program to get all trainees
     public function get_all_trainees($request)
