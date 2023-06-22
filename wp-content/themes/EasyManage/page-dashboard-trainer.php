@@ -108,8 +108,8 @@ Template Name: Trainer dashboard Page
             </div>
         </div>
         <div class="latest">
-              <!-- latest user table -->
-              <table>
+                 <!-- latest user table -->
+            <table>
                 <h2 style="text-align:center;font-size:20px;color:#008759;font-weight:bold;">Latest User</h2>
                 <thead>
                     <tr>
@@ -120,12 +120,32 @@ Template Name: Trainer dashboard Page
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>Active</td>
-                        <td>johndoe@example.com</td>
-                        <td>Administrator</td>
-                    </tr>
+                    <?php
+                    global $wpdb;
+                    $latestUser = $wpdb->get_row("
+                        SELECT user_login, user_status, user_email, meta_value AS role
+                        FROM {$wpdb->users} AS users
+                        LEFT JOIN {$wpdb->usermeta} AS usermeta ON users.ID = usermeta.user_id
+                        WHERE usermeta.meta_key = '{$wpdb->prefix}capabilities'
+                        ORDER BY users.ID DESC
+                        LIMIT 1
+                    ");
+
+                    if ($latestUser) {
+                        $name = $latestUser->user_login;
+                        $status = ($latestUser->user_status == 0) ? 'Inactive' : 'Active';
+                        $email = $latestUser->user_email;
+                        $role = unserialize($latestUser->role);
+                        $role = key($role);
+
+                        echo "<tr>
+                                <td>$name</td>
+                                <td>$status</td>
+                                <td>$email</td>
+                                <td>$role</td>
+                            </tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
 
@@ -135,18 +155,32 @@ Template Name: Trainer dashboard Page
                 <thead>
                     <tr>
                         <th>Project name</th>
-                        <th>Stack</th>
                         <th>Assignee</th>
                         <th>Due date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Event management</td>
-                        <td>Wordpress</td>
-                        <td>john doe</td>
-                        <td>2023-07-05</td>
-                    </tr>
+                    <?php
+                    // Fetch latest project from wp_projects table
+                    $latestProject = $wpdb->get_row("
+                        SELECT project_name, assignee, due_date
+                        FROM wp_projects
+                        ORDER BY id DESC
+                        LIMIT 1
+                    ");
+
+                    if ($latestProject) {
+                        $projectName = $latestProject->project_name;
+                        $assignee = $latestProject->assignee;
+                        $dueDate = $latestProject->due_date;
+
+                        echo "<tr>
+                                <td>$projectName</td>
+                                <td>$assignee</td>
+                                <td>$dueDate</td>
+                            </tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
           </div>
