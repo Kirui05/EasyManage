@@ -48,13 +48,13 @@ class projectroutes
 
         $project_name = $request->get_param('project_name');
         $due_date = $request->get_param('due_date');
-        $project_details = $request->get_param('project_details');
+        $project_description = $request->get_param('project_description');
         $assignee = $request->get_param('assignee');
         
         $data = array(
             'project_name' => $project_name,
             'due_date' => $due_date,
-            'project_details' => $project_details,
+            'project_description' => $project_description,
             'assignee' => $assignee,
         );
         
@@ -109,13 +109,13 @@ class projectroutes
         $project_id = $request->get_param('project_id');
         $project_name = $request->get_param('project_name');
         $due_date = $request->get_param('due_date');
-        $project_details = $request->get_param('project_details');
+        $project_description = $request->get_param('project_description');
         $assignee = $request->get_param('assignee');
 
         $data = array(
             'project_name' => $project_name,
             'due_date' => $due_date,
-            'project_details' => $project_details,
+            'project_description' => $project_description,
             'assignee' => $assignee,
         );
 

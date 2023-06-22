@@ -31,7 +31,10 @@ class PMroutes
             'methods' => 'DELETE',
             'callback' => array($this, 'soft_delete_manager'),
         ));
-
+        register_rest_route('easymanage/v2', '/program_manager/(?P<id>\d+)', array(
+            'methods' => 'PATCH',
+            'callback' => array($this, 'update_program_manager'),
+        ));
         register_rest_route('easymanage/v2', '/program_manager', array(
             'methods' => 'GET',
             'callback' => array($this, 'get_all_managers'),
@@ -114,5 +117,28 @@ class PMroutes
             $response = new WP_Error('404', 'Program managers not found');
         }
         return rest_ensure_response($response);
+    }
+
+    // update program manager
+    public function update_program_manager($request)
+    {
+        $user = wp_insert_user(
+            [
+                'user_login' => $request['program_manager_name'],
+                'user_email' => $request['email'],
+                'user_pass' => 'program_manager',
+                'role' => 'program_manager',
+                'meta_input' => [
+                    'is_deactivated' => 0,
+                    'is_deleted' => 0
+                ]
+            ]
+        );
+        if (is_wp_error($user)) {
+            $error_message = $user->get_error_message();
+            return new WP_Error('400', $error_message);
+        } else {
+            return rest_ensure_response($user);
+        }
     }
 }

@@ -45,11 +45,11 @@ class createtables
 
         $sql = "CREATE TABLE $table_name (
             id INT NOT NULL AUTO_INCREMENT,
-            project_name VARCHAR(255) NOT NULL,
+            project_name text NOT NULL,
             due_date DATE NOT NULL,
             is_completed int NOT NULL default 0,
-            project_description TEXT,
-            assignee VARCHAR(255),
+            project_description text NOT NULL,
+            assignee text NOT NULL,
             PRIMARY KEY (id)
         ) $charset_collate;";
 

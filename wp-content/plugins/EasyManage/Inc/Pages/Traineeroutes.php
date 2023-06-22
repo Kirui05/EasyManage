@@ -38,6 +38,10 @@ class traineeroutes
             // }
         ));
         register_rest_route('easymanage/v2', '/trainee/(?P<id>\d+)', array(
+            'methods' => 'PATCH',
+            'callback' => array($this, 'update_trainee'),
+        ));
+        register_rest_route('easymanage/v2', '/trainee/(?P<id>\d+)', array(
             'methods' => 'DELETE',
             'callback' => array($this, 'soft_delete_trainee'),
         ));
@@ -116,5 +120,28 @@ class traineeroutes
             $response = new WP_Error('404', 'trainees not found');
         }
         return rest_ensure_response($response);
+    }
+
+    // update trainee
+    public function update_trainee($request)
+    {
+        $user = wp_insert_user(
+            [
+                'user_login' => $request['trainee_name'],
+                'user_email' => $request['email'],
+                'user_pass' => 'trainee',
+                'role' => 'trainee',
+                'meta_input' => [
+                    'is_deactivated' => 0,
+                    'is_deleted' => 0
+                ]
+            ]
+        );
+        if (is_wp_error($user)) {
+            $error_message = $user->get_error_message();
+            return new WP_Error('400', $error_message);
+        } else {
+            return rest_ensure_response($user->email);
+        }
     }
 }

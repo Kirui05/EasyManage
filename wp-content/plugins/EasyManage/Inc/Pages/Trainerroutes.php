@@ -39,6 +39,10 @@ class trainerroutes
             // }
         ));
         register_rest_route('easymanage/v2', '/trainer/(?P<id>\d+)', array(
+            'methods' => 'PATCH',
+            'callback' => array($this, 'update_trainer'),
+        ));
+        register_rest_route('easymanage/v2', '/trainer/(?P<id>\d+)', array(
             'methods' => 'DELETE',
             'callback' => array($this, 'soft_delete_trainer'),
         ));
@@ -118,5 +122,28 @@ class trainerroutes
             $response = new WP_Error('404', 'trainers not found');
         }
         return rest_ensure_response($response);
+    }
+
+    // update trainer
+    public function update_trainer($request)
+    {
+        $user = wp_insert_user(
+            [
+                'user_login' => $request['trainer_name'],
+                'user_email' => $request['email'],
+                'user_pass' => 'trainer',
+                'role' => 'trainer',
+                'meta_input' => [
+                    'is_deactivated' => 0,
+                    'is_deleted' => 0
+                ]
+            ]
+        );
+        if (is_wp_error($user)) {
+            $error_message = $user->get_error_message();
+            return new WP_Error('400', $error_message);
+        } else {
+            return rest_ensure_response($user->email);
+        }
     }
 }
