@@ -37,9 +37,6 @@ Template Name: Dashboard Page
 
         ?>
 
-        <!DOCTYPE html>
-        <html>
-
         <head>
             <style>
                 .card {
@@ -106,6 +103,49 @@ Template Name: Dashboard Page
 
             </div>
 
+          <div class="latest">
+              <!-- latest user table -->
+              <table>
+                <h2 style="text-align:center;font-size:20px;color:#008759;font-weight:bold;">Latest User</h2>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Active</td>
+                        <td>johndoe@example.com</td>
+                        <td>Administrator</td>
+                    </tr>
+                </tbody>
+            </table>
+
+             <!-- latest project table -->
+             <table>
+                <h2 style="text-align:center;font-size:20px;color:#008759;font-weight:bold;">Latest Project</h2>
+                <thead>
+                    <tr>
+                        <th>Project name</th>
+                        <th>Stack</th>
+                        <th>Assignee</th>
+                        <th>Due date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Event management</td>
+                        <td>Wordpress</td>
+                        <td>john doe</td>
+                        <td>2023-07-05</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
 </main>
 
 <style>

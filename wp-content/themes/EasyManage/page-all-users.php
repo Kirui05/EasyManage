@@ -87,11 +87,8 @@ Template Name: All users Page
     }
 
     .table {
-        border-collapse: separate;
-        border-spacing: 0;
         width: 100%;
         margin-top: 10px;
-        /* Adjust the margin as needed */
     }
 
     .table th,
@@ -99,13 +96,10 @@ Template Name: All users Page
         padding: 8px;
         vertical-align: middle;
         text-align: left;
-        border-top: 1px solid #e6e6e6;
-        border-bottom: 1px solid #e6e6e6;
     }
 
     .table thead th {
         background-color: #ffff;
-        border-bottom: 1px solid #e6e6e6;
     }
 
     .table tbody tr:nth-of-type(even) {
@@ -124,7 +118,6 @@ Template Name: All users Page
     .table .btn-success {
         background-color: #008759;
         color: #fff;
-        border-color: #008759;
         width: 80px;
         border-radius: 25px;
     }
@@ -132,7 +125,6 @@ Template Name: All users Page
     .table .btn-fail {
         background-color: red;
         color: #fff;
-        border-color: red;
         width: 80px;
         border-radius: 25px;
     }
@@ -140,16 +132,10 @@ Template Name: All users Page
     .table .btn-danger {
         background-color: #dc3545;
         color: #fff;
-        border-color: #dc3545;
     }
 
     .table .fa {
         margin-right: 5px;
-    }
-
-    .table th:last-child,
-    .table td:last-child {
-        border-right: 1px solid #e6e6e6;
     }
 
     a:hover {

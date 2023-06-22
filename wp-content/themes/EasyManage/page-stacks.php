@@ -71,11 +71,8 @@ Template Name: Stacks Page
     }
 
     .table {
-        border-collapse: separate;
-        border-spacing: 0;
         width: 100%;
         margin-top: 10px;
-        /* Adjust the margin as needed */
     }
 
     .table th,
@@ -83,13 +80,10 @@ Template Name: Stacks Page
         padding: 8px;
         vertical-align: middle;
         text-align: left;
-        border-top: 1px solid #e6e6e6;
-        border-bottom: 1px solid #e6e6e6;
     }
 
     .table thead th {
         background-color: #ffff;
-        border-bottom: 1px solid #e6e6e6;
     }
 
     .table tbody tr:nth-of-type(even) {
@@ -108,7 +102,6 @@ Template Name: Stacks Page
     .table .btn-success {
         background-color: #008759;
         color: #fff;
-        border-color: #008759;
         width: 100px;
         border-radius: 25px;
     }
@@ -116,7 +109,6 @@ Template Name: Stacks Page
     .table .btn-ongoing {
         background-color: #FFBF00;
         color: #fff;
-        border-color: #FFBF00;
         width: 100px;
         border-radius: 25px;
     }
@@ -124,7 +116,6 @@ Template Name: Stacks Page
     .table .btn-danger {
         background-color: #dc3545;
         color: #fff;
-        border-color: #dc3545;
     }
 
     .table .fa {

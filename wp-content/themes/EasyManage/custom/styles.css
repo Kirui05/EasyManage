@@ -205,3 +205,29 @@ footer {
   display: flex;
   flex-direction: row;
 }
+ /* latest user styling */
+ .latest{
+  display: flex;
+  flex-direction: column;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  background-color: #fff;
+}
+thead tr{
+  color: #000;
+  text-align: center;
+}
+
+tbody td {
+  padding: 10px;
+  text-align: center;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8f8f8;
+}

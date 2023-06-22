@@ -45,7 +45,7 @@ $stacks_count = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}stacks");
         ?>
 
         <style>
-            .card {
+             .card {
                 background-color: #fff;
                 padding: 20px;
                 border-radius: 10px;
@@ -71,35 +71,6 @@ $stacks_count = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}stacks");
                 background-color: #008759;
                 color: #fff;
                 font-weight: bold;
-            }
-
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 25px;
-            }
-
-            th,
-            td {
-                border: 1px solid #ccc;
-                padding: 8px;
-            }
-
-            th {
-                background-color: #f8f8f8;
-                font-weight: bold;
-            }
-
-            main {
-                display: grid;
-                grid-template-columns: 250px 1fr;
-                grid-template-rows: 82vh;
-            }
-
-            .main-container {
-                width: 100%;
-                height: 82vh;
-                background-color: #f8f8f8;
             }
         </style>
 
@@ -136,7 +107,61 @@ $stacks_count = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}stacks");
                 </div>
             </div>
         </div>
-    </div>
-</main>
+        <div class="latest">
+              <!-- latest user table -->
+              <table>
+                <h2 style="text-align:center;font-size:20px;color:#008759;font-weight:bold;">Latest User</h2>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Active</td>
+                        <td>johndoe@example.com</td>
+                        <td>Administrator</td>
+                    </tr>
+                </tbody>
+            </table>
 
+             <!-- latest project table -->
+             <table>
+                <h2 style="text-align:center;font-size:20px;color:#008759;font-weight:bold;">Latest Project</h2>
+                <thead>
+                    <tr>
+                        <th>Project name</th>
+                        <th>Stack</th>
+                        <th>Assignee</th>
+                        <th>Due date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Event management</td>
+                        <td>Wordpress</td>
+                        <td>john doe</td>
+                        <td>2023-07-05</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+</main>
+<style>
+    main {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: 82vh;
+    }
+
+    .main-container {
+        width: 100%;
+        height: 82vh;
+        background-color: #f8f8f8;
+    }
+</style>
 <?php get_footer() ?>

@@ -65,14 +65,14 @@ Template Name: Trainee dashboard Page
             <div class="card">
                 <div class="card-content">
                     <h3 style="color:#008759;font-size:25px;margin-bottom: 25px;">Ongoing projects</h3>
-                    <p style="margin-bottom:25px" >Total number of ongoing projects</p>
+                    <p style="margin-bottom:25px">Total number of ongoing projects</p>
                     <div style="width: 75px; height: 75px; border-radius: 50%; background-color: red; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">1</div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
                     <h3 style="color:#008759;font-size:25px;margin-bottom:25px">Completed projects</h3>
-                    <p style="margin-bottom:25px" >Total number of completed projects</p>
+                    <p style="margin-bottom:25px">Total number of completed projects</p>
                     <div style="width: 75px; height: 75px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">1</div>
                 </div>
             </div>
@@ -92,7 +92,49 @@ Template Name: Trainee dashboard Page
                 </div>
             </div>
         </div>
+        <div class="latest">
+            <!-- latest user table -->
+            <table>
+                <h2 style="text-align:center;font-size:20px;color:#008759;font-weight:bold;">Latest User</h2>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>Active</td>
+                        <td>johndoe@example.com</td>
+                        <td>Administrator</td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <!-- latest project table -->
+            <table>
+                <h2 style="text-align:center;font-size:20px;color:#008759;font-weight:bold;">Latest Project</h2>
+                <thead>
+                    <tr>
+                        <th>Project name</th>
+                        <th>Stack</th>
+                        <th>Assignee</th>
+                        <th>Due date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Event management</td>
+                        <td>Wordpress</td>
+                        <td>john doe</td>
+                        <td>2023-07-05</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 </main>
 
 <style>
