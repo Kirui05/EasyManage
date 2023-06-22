@@ -4,10 +4,10 @@ Template Name: Projects Page
 */
 ?>
 
-<?php get_header() ?>
+<?php get_header(); ?>
 <main>
 
-    <?php get_sidebar() ?>
+    <?php get_sidebar(); ?>
 
     <div class="main-container">
 
@@ -16,134 +16,29 @@ Template Name: Projects Page
                 <tr style="color:#008759">
                     <th>Project name</th>
                     <th>Due date</th>
-                    <th>Status</th>
-                    <th>Project details</th>
+                    <th>Project description</th>
                     <th>Assignee</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <i></i> Project management
-                    </td>
-                    <td> June 13, 2023 </td>
-                    <td>
-                        <button class="btn btn-ongoing">Ongoing</button>
-                    </td>
-                    <td>Allow Admin to deactivate trainee accounts xxx</td>
-                    <td>Nick, Collins</td>
-                    <td>
-                        <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
-                    </td>
-                </tr>
+                <?php
+                global $wpdb;
 
-                <tr>
-                    <td>
-                        <i></i> Project management
-                    </td>
-                    <td> June 13, 2023 </td>
-                    <td>
-                        <button class="btn btn-success">Completed</button>
-                    </td>
-                    <td>Allow Admin to deactivate trainee accounts xxx</td>
-                    <td>Nick, Hope</td>
-                    <td>
-                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
-                    </td>
-                </tr>
+                $projects = $wpdb->get_results("SELECT * FROM wp_projects");
 
-                <tr>
-                    <td>
-                        <i></i> Project management
-                    </td>
-                    <td> June 13, 2023 </td>
-                    <td>
-                        <button class="btn btn-ongoing">Ongoing</button>
-                    </td>
-                    <td>Allow Admin to deactivate trainee accounts xxx</td>
-                    <td>Mary, Collins</td>
-                    <td>
-                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Project management
-                    </td>
-                    <td> June 13, 2023 </td>
-                    <td>
-                        <button class="btn btn-success">Completed</button>
-                    </td>
-                    <td>Allow Admin to deactivate trainee accounts xxx</td>
-                    <td>Mercy, Collins</td>
-                    <td>
-                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Project management
-                    </td>
-                    <td> June 13, 2023 </td>
-                    <td>
-                        <button class="btn btn-ongoing">Ongoing</button>
-                    </td>
-                    <td>Allow Admin to deactivate trainee accounts xxx</td>
-                    <td>Nick, Patrick</td>
-                    <td>
-                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Project management
-                    </td>
-                    <td> June 13, 2023 </td>
-                    <td>
-                        <button class="btn btn-success">Completed</button>
-                    </td>
-                    <td>Allow Admin to deactivate trainee accounts xxx</td>
-                    <td>Brian, Collins</td>
-                    <td>
-                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Project management
-                    </td>
-                    <td> June 13, 2023 </td>
-                    <td>
-                        <button class="btn btn-ongoing">Ongoing</button>
-                    </td>
-                    <td>Allow Admin to deactivate trainee accounts xxx</td>
-                    <td>Nick, Patrick</td>
-                    <td>
-                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <i></i> Project management
-                    </td>
-                    <td> June 13, 2023 </td>
-                    <td>
-                        <button class="btn btn-success">Completed</button>
-                    </td>
-                    <td>Allow Admin to deactivate trainee accounts xxx</td>
-                    <td>Mary, Collins</td>
-                    <td>
-                    <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/"></a>
-                    </td>
-                </tr>
-
-                <!-- Add more rows as needed -->
+                foreach ($projects as $project) {
+                    ?>
+                    <tr>
+                        <td>
+                            <i></i><?php echo $project->project_name; ?>
+                        </td>
+                        <td><?php echo $project->due_date; ?></td>
+                        <td><?php echo $project->project_description; ?></td>
+                        <td><?php echo $project->assignee; ?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
             </tbody>
         </table>
 
@@ -237,4 +132,4 @@ Template Name: Projects Page
     }
 </style>
 
-<?php get_footer() ?>
+<?php get_footer(); ?>
