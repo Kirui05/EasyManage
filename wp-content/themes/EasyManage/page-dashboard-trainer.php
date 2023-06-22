@@ -27,6 +27,20 @@ Template Name: Trainer dashboard Page
 
         // Get the month name
         $monthName = date('F', strtotime($currentDate));
+
+        // Retrieve the number of trainees from wp_users with role "trainee"
+        global $wpdb;
+        $traineesCount = $wpdb->get_var("
+            SELECT COUNT(*) 
+            FROM {$wpdb->users} AS users
+            INNER JOIN {$wpdb->usermeta} AS usermeta ON users.ID = usermeta.user_id
+            WHERE usermeta.meta_key = '{$wpdb->prefix}capabilities'
+            AND usermeta.meta_value LIKE '%trainee%'
+        ");
+
+        // Retrieve the number of projects from wp_projects
+        $projectsCount = $wpdb->get_var("SELECT COUNT(*) FROM wp_projects");
+
         ?>
 
 
@@ -67,14 +81,14 @@ Template Name: Trainer dashboard Page
                 <div class="card-content">
                     <h3 style="color:#008759;font-size:25px;margin-bottom: 25px;">Trainees</h3>
                     <p>Total number of trainees</p>
-                    <div style="width: 75px; height: 75px;margin-bottom: 25px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">1</div>
+                    <div style="width: 75px; height: 75px;margin-bottom: 25px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;"><?php echo $traineesCount; ?></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
                     <h3 style="color:#008759;font-size:25px;margin-bottom: 25px;">Projects</h3>
                     <p>Total number of projects</p>
-                    <div style="width: 75px; height: 75px;margin-bottom: 25px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">1</div>
+                    <div style="width: 75px; height: 75px;margin-bottom: 25px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;"><?php echo $projectsCount; ?></div>
                 </div>
             </div>
 

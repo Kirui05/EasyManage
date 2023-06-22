@@ -27,6 +27,14 @@ Template Name: Dashboard Page
 
         // Get the month name
         $monthName = date('F', strtotime($currentDate));
+
+        // Get the number of users
+        global $wpdb;
+        $usersCount = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}users");
+
+        // Get the number of projects
+        $projectsCount = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}projects");
+
         ?>
 
         <!DOCTYPE html>
@@ -65,18 +73,18 @@ Template Name: Dashboard Page
 
             <div class="cardcover" style="display:flex;flex-direction:row">
                 <!-- cards -->
-                <div class="card" >
+                <div class="card">
                     <div class="card-content">
                         <h3 style="color:#008759;font-size:25px;margin-bottom: 25px;">Users</h3>
                         <p>Total number of users</p>
-                        <div style="width: 75px; height: 75px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; margin-bottom: 25px;">1</div>
+                        <div style="width: 75px; height: 75px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; margin-bottom: 25px;"><?php echo $usersCount; ?></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-content">
                         <h3 style="color:#008759;font-size:25px;margin-bottom: 25px;">Projects</h3>
                         <p>Total number of projects</p>
-                        <div style="width: 75px; height: 75px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;margin-bottom: 25px;">1</div>
+                        <div style="width: 75px; height: 75px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;margin-bottom: 25px;"><?php echo $projectsCount; ?></div>
                     </div>
                 </div>
 

@@ -8,6 +8,21 @@ Template Name: PM dashboard Page
 
 <!-- Dashboard form -->
 
+<?php
+ // Retrieve the number of trainers from wp_users with role "trainer"
+ global $wpdb;
+ $trainersCount = $wpdb->get_var("
+     SELECT COUNT(*) 
+     FROM {$wpdb->users} AS users
+     INNER JOIN {$wpdb->usermeta} AS usermeta ON users.ID = usermeta.user_id
+     WHERE usermeta.meta_key = '{$wpdb->prefix}capabilities'
+     AND usermeta.meta_value LIKE '%trainer%'
+ ");
+
+// Retrieve the number of stacks from wp_stacks table
+$stacks_count = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}stacks");
+?>
+
 <main>
     <?php get_sidebar() ?>
 
@@ -64,7 +79,8 @@ Template Name: PM dashboard Page
                 margin-top: 25px;
             }
 
-            th, td {
+            th,
+            td {
                 border: 1px solid #ccc;
                 padding: 8px;
             }
@@ -72,6 +88,18 @@ Template Name: PM dashboard Page
             th {
                 background-color: #f8f8f8;
                 font-weight: bold;
+            }
+
+            main {
+                display: grid;
+                grid-template-columns: 250px 1fr;
+                grid-template-rows: 82vh;
+            }
+
+            .main-container {
+                width: 100%;
+                height: 82vh;
+                background-color: #f8f8f8;
             }
         </style>
 
@@ -82,14 +110,14 @@ Template Name: PM dashboard Page
                 <div class="card-content">
                     <h3 style="color:#008759;font-size:25px;margin-bottom:25px">Trainers</h3>
                     <p style="margin-bottom:25px">Total number of trainers</p>
-                    <div style="width: 75px; height: 75px;margin-bottom:25px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">1</div>
+                    <div style="width: 75px; height: 75px;margin-bottom:25px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;"><?php echo $trainersCount; ?></div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
                     <h3 style="color:#008759;font-size:25px;margin-bottom:25px">Stacks</h3>
                     <p style="margin-bottom:25px">Total number of stacks</p>
-                    <div style="width: 75px; height: 75px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;">1</div>
+                    <div style="width: 75px; height: 75px; border-radius: 50%; background-color: #008759; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold;"><?php echo $stacks_count; ?></div>
                 </div>
             </div>
 
@@ -108,36 +136,7 @@ Template Name: PM dashboard Page
                 </div>
             </div>
         </div>
-
-        <!-- Latest trainer table -->
-        <?php
-        // Retrieve the latest trainer from the database
-        global $wpdb;
-        $latestTrainer = $wpdb->get_row("SELECT * FROM trainers ORDER BY id DESC LIMIT 1");
-
-        if ($latestTrainer) {
-            echo '<table>';
-            echo '<tr><th>ID</th><th>Name</th><th>Email</th></tr>';
-            echo '<tr><td>' . $latestTrainer->id . '</td><td>' . $latestTrainer->name . '</td><td>' . $latestTrainer->email . '</td></tr>';
-            echo '</table>';
-        } else {
-            echo '<p>No trainers found.</p>';
-        }
-        ?>
     </div>
 </main>
 
-<style>
-    main {
-        display: grid;
-        grid-template-columns: 250px 1fr;
-        grid-template-rows: 82vh;
-    }
-
-    .main-container {
-        width: 100%;
-        height: 82vh;
-        background-color: #f8f8f8;
-    }
-</style>
 <?php get_footer() ?>
