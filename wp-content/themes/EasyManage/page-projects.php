@@ -18,6 +18,7 @@ Template Name: Projects Page
                     <th>Due date</th>
                     <th>Project description</th>
                     <th>Assignee</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +28,7 @@ Template Name: Projects Page
                 $projects = $wpdb->get_results("SELECT * FROM wp_projects");
 
                 foreach ($projects as $project) {
-                    ?>
+                ?>
                     <tr>
                         <td>
                             <i></i><?php echo $project->project_name; ?>
@@ -35,8 +36,11 @@ Template Name: Projects Page
                         <td><?php echo $project->due_date; ?></td>
                         <td><?php echo $project->project_description; ?></td>
                         <td><?php echo $project->assignee; ?></td>
+                        <td>
+                            <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
+                        </td>
                     </tr>
-                    <?php
+                <?php
                 }
                 ?>
             </tbody>
@@ -127,8 +131,9 @@ Template Name: Projects Page
     .table td:last-child {
         border-right: 1px solid #e6e6e6;
     }
+
     a:hover {
-      color: white;
+        color: white;
     }
 </style>
 

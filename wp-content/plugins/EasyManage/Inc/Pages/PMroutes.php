@@ -50,6 +50,7 @@ class PMroutes
                 'user_pass' => 'program_manager',
                 'role' => 'program_manager',
                 'meta_input' => [
+                    'phone_number'=>$request['Phone number'],
                     'is_deactivated' => 0,
                     'is_deleted' => 0
                 ]
@@ -129,6 +130,7 @@ class PMroutes
                 'user_pass' => 'program_manager',
                 'role' => 'program_manager',
                 'meta_input' => [
+                    'phone_number'=>$request['Phone number'],
                     'is_deactivated' => 0,
                     'is_deleted' => 0
                 ]

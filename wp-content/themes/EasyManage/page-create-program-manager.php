@@ -15,7 +15,7 @@ Template Name: Create program manager Page
         <!-- Create program manager form -->
         <div class="login">
             <div class="logcover">
-                <form action="" method="POST">
+                <form action="" method="POST" id="create-manager-form">
                     <div class="form">
                         <h2>Create Program Manager</h2>
 
@@ -62,4 +62,39 @@ Template Name: Create program manager Page
         background-color: #f8f8f8;
     }
 </style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#create-manager-form').submit(function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            // Collect form data
+            var formData = {
+                name: $('input[name="name"]').val(),
+                email: $('input[name="email"]').val(),
+                number: $('input[name="number"]').val()
+            };
+
+            // Send POST request to API endpoint
+            $.ajax({
+                url: 'http://localhost/EasyManage/wp-json/easymanage/v2/program_manager',
+                type: 'POST',
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
+                success: function(response) {
+                    // Handle success response
+                    console.log('Manager created successfully:', response);
+                    // Display success message or redirect to a success page
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.log('Error creating manager:', error);
+                    // Display error message to the user
+                }
+            });
+        });
+    });
+</script>
+
 <?php get_footer() ?>
