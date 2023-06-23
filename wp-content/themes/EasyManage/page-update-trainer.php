@@ -1,9 +1,9 @@
 <?php
 
 if (isset($_POST['update-trainer'])) {
-    update_user_meta( get_current_user_id(), 'update_trainer', $_POST[''] );
-wp_redirect('http://localhost/EasyManage/all-trainers/');
-    }
+    update_user_meta(get_current_user_id(), 'update_trainer', $_POST['']);
+    wp_redirect('http://localhost/EasyManage/all-trainers/');
+}
 /*
 Template Name: Update trainer Page
 */
@@ -46,10 +46,10 @@ Template Name: Update trainer Page
                             </div>
                         </div>
                         <div class="input1">
-                            <label for="">Password</label>
+                            <label for="">Phone number</label>
                             <div class="icons1">
-                                <ion-icon name="lock-open-outline"></ion-icon>
-                                <input type="password" placeholder="Enter password" name="password" required>
+                                <ion-icon name="call-outline"></ion-icon>
+                                <input type="number" placeholder="Enter phone number" name="number" required>
                             </div>
                         </div>
                         <button type="submit" class="btnlog" name="update-trainer">Update</button>
