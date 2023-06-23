@@ -53,7 +53,7 @@ class trainerroutes
             [
                 'user_login' => $request['trainer_name'],
                 'user_email' => $request['email'],
-                'user_pass' => 'trainer',
+                'user_password' => $request['password'],
                 'role' => 'trainer',
                 'meta_input' => [
                     'is_deactivated' => 0,
@@ -131,7 +131,7 @@ class trainerroutes
             [
                 'user_login' => $request['trainer_name'],
                 'user_email' => $request['email'],
-                'user_pass' => 'trainer',
+                'user_password' => $request['password'],
                 'role' => 'trainer',
                 'meta_input' => [
                     'is_deactivated' => 0,

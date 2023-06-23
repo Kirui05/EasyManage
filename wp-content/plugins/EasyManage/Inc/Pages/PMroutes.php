@@ -47,10 +47,9 @@ class PMroutes
             [
                 'user_login' => $request['program_manager_name'],
                 'user_email' => $request['email'],
-                'user_pass' => 'program_manager',
+                'user_password' => $request['password'],
                 'role' => 'program_manager',
                 'meta_input' => [
-                    'phone_number'=>$request['Phone number'],
                     'is_deactivated' => 0,
                     'is_deleted' => 0
                 ]
@@ -127,10 +126,9 @@ class PMroutes
             [
                 'user_login' => $request['program_manager_name'],
                 'user_email' => $request['email'],
-                'user_pass' => 'program_manager',
+                'user_password' => $request['password'],
                 'role' => 'program_manager',
                 'meta_input' => [
-                    'phone_number'=>$request['Phone number'],
                     'is_deactivated' => 0,
                     'is_deleted' => 0
                 ]

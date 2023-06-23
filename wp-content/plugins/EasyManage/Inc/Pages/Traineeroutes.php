@@ -52,7 +52,7 @@ class traineeroutes
             [
                 'user_login' => $request['trainee_name'],
                 'user_email' => $request['email'],
-                'user_pass' => 'trainee',
+                'user_password' => $request['password'],
                 'role' => 'trainee',
                 'meta_input' => [
                     'is_deactivated' => 0,
@@ -129,7 +129,7 @@ class traineeroutes
             [
                 'user_login' => $request['trainee_name'],
                 'user_email' => $request['email'],
-                'user_pass' => 'trainee',
+                'user_password' => $request['password'],
                 'role' => 'trainee',
                 'meta_input' => [
                     'is_deactivated' => 0,

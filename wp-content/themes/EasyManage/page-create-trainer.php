@@ -42,10 +42,10 @@ Template Name: Create trainer Page
                             </div>
                         </div>
                         <div class="input1">
-                            <label for="">Phone number</label>
+                            <label for="">Password</label>
                             <div class="icons1">
-                                <ion-icon name="call-outline"></ion-icon>
-                                <input type="number" placeholder="Enter phone number" name="number" required>
+                                <ion-icon name="lock-closed-outline"></ion-icon>
+                                <input type="password" placeholder="Enter password" name="password" required>
                             </div>
                         </div>
                         <button type="submit" class="btnlog" name="login-submit">Create</button>
