@@ -74,7 +74,7 @@ Template Name: Trainer dashboard Page
             }
         </style>
 
-        <div class="cardcover" style="display:flex;flex-direction:row">
+        <div class="cardcover" style="display:flex;flex-direction:row;justify-content:center">
 
             <!-- cards -->
             <div class="card">

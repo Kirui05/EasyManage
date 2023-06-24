@@ -74,7 +74,7 @@ $stacks_count = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}stacks");
             }
         </style>
 
-        <div class="cardcover" style="display:flex;flex-direction:row">
+        <div class="cardcover" style="display:flex;flex-direction:row;justify-content:center">
 
             <!-- cards -->
             <div class="card">
