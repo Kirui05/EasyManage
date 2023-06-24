@@ -47,7 +47,7 @@ class PMroutes
             [
                 'user_login' => $request['program_manager_name'],
                 'user_email' => $request['email'],
-                'user_password' => $request['password'],
+                'user_pass' => $request['password'],
                 'role' => 'program_manager',
                 'meta_input' => [
                     'is_deactivated' => 0,
