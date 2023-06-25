@@ -7,6 +7,63 @@ Template Name: Create trainee Page
 <?php get_header() ?>
 
 <main>
+    <!-- code to add trainee -->
+    <?php
+    global $success_msg;
+
+    if ($success_msg) {
+        echo "<p id='message'>Trainee created successfully</p>";
+        echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+        echo '<script> 
+                setTimeout(function(){
+                    document.getElementById("message").style.display ="none";
+                }, 3000);
+            </script>';
+    }
+
+    if (isset($_POST['submit'])) {
+        $trainee_name = $_POST['trainee_name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+      
+  // Create the trainer using the API endpoint
+        $body = [
+            'trainee_name' => $trainee_name,
+            'email' => $email,
+            'password' => $password
+        ];
+
+        $args = [
+            'body' => $body,
+            'method' => 'POST'
+        ];
+
+        $response = $response = wp_remote_post( 'http://localhost/EasyManage/wp-json/easymanage/v2/trainee',$args );
+       
+        if (!is_wp_error($response)) {
+            $response_data = json_decode(wp_remote_retrieve_body($response), true);
+            // Display success message
+            echo '<p id="message">Trainee created successfully</p>';
+            echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+            echo '<script> 
+                    setTimeout(function(){
+                        document.getElementById("message").style.display = "none";
+                    }, 3000); 
+                </script>';
+        } else {
+            //Display error message
+            echo '<p id="message">Error: ' . $response->get_error_message() . '</p>';
+            echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+            echo '<script> 
+                    setTimeout(function(){
+                        document.getElementById("message").style.display = "none";
+                    }, 3000);
+                </script>';
+        }
+    }
+    ?>
+    <!-- end -->
     <?php get_sidebar() ?>
 
     <div class="main-container">
@@ -20,7 +77,7 @@ Template Name: Create trainee Page
                         <label for="name">Trainee name</label>
                         <div class="icons1">
                             <ion-icon name="person-outline"></ion-icon>
-                            <input placeholder="Enter program manager name" type="text" id="name" name="managername" />
+                            <input placeholder="Enter trainee name" type="text" id="name" name="trainee_name" />
                         </div>
                     </div>
                     <div class="input1">
@@ -31,7 +88,7 @@ Template Name: Create trainee Page
                         </div>
                     </div>
                     <div class="input1">
-                        <label for="phone">Password</label>
+                        <label for="password">Password</label>
                         <div class="icons1">
                             <ion-icon name="lock-closed-outline"></ion-icon>
                             <input placeholder="Enter password" type="password" name="password" id="password" />

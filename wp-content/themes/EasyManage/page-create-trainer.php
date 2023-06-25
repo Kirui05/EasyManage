@@ -9,7 +9,69 @@ Template Name: Create trainer Page
     <?php get_sidebar() ?>
 
     <div class="main-container">
+<!-- code to create trainer -->
+<?php
+    global $success_msg;
 
+    if ($success_msg) {
+        echo "<p id='message'>Trainer created successfully</p>";
+        echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+        echo '<script> 
+                setTimeout(function(){
+                    document.getElementById("message").style.display ="none";
+                }, 3000);
+            </script>';
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+        $trainer_name = $_POST['trainer_name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        // Create the trainer using the API endpoint
+
+
+
+        $body = [
+            'trainer_name' => $trainer_name,
+            'email' => $email,
+            'password' => $password
+        ];
+
+        $args = [
+            'body'        => $body,
+            'timeout'     => '5',
+            'redirection' => '5',
+        ];
+
+        $response = $response = wp_remote_post( 'http://localhost/EasyManage/wp-json/easymanage/v2/trainer', $args );
+        // var_dump($response);
+
+
+
+        if (!is_wp_error($response)) {
+            $response_data = json_decode(wp_remote_retrieve_body($response), true);
+            // Display success message
+            echo '<p id="message">Trainer created successfully</p>';
+            echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+            echo '<script> 
+                    setTimeout(function(){
+                        document.getElementById("message").style.display = "none";
+                    }, 3000); 
+                </script>';
+        } else {
+            //Display error message
+            echo '<p id="message">Error: ' . $response->get_error_message() . '</p>';
+            echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+            echo '<script> 
+                    setTimeout(function(){
+                        document.getElementById("message").style.display = "none";
+                    }, 3000);
+                </script>';
+        }
+    }
+    ?>
+<!-- end -->
         <!-- Create trainer form -->
         <div class="login">
             <div class="logcover">
@@ -20,7 +82,7 @@ Template Name: Create trainer Page
                         <label for="name">Trainer name</label>
                         <div class="icons1">
                             <ion-icon name="person-outline"></ion-icon>
-                            <input placeholder="Enter program manager name" type="text" id="name" name="managername" />
+                            <input placeholder="Enter trainer name" type="text" id="name" name="trainer_name" />
                         </div>
                     </div>
                     <div class="input1">
@@ -40,7 +102,7 @@ Template Name: Create trainer Page
                         </div>
                     </div>
                     <div class="input1">
-                        <label for="phone">Password</label>
+                        <label for="password">Password</label>
                         <div class="icons1">
                             <ion-icon name="lock-closed-outline"></ion-icon>
                             <input placeholder="Enter password" type="password" name="password" id="password" />
