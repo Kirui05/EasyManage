@@ -102,7 +102,7 @@ Template Name: Create stack Page
                         </div>
                         <div class="input1">
                             <label for="">Assignee</label>
-                            <select class="assignee" id="assignee" name="assignee" multiple>
+                            <select class="assignee" id="assignee" name="assignee">
                                 <?php foreach ($trainers as $trainer) :
                                     $trainer_name = $trainer->display_name;
                                     $trainer_id = $trainer->ID;
