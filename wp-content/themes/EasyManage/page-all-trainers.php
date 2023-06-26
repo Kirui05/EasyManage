@@ -36,8 +36,8 @@ Template Name: All trainers Page
                         $trainer_email = $trainer->user_email;
                         $trainer_role = 'Trainer';
                         $trainer_id = $trainer->ID;
-                        $edit_link = 'http://localhost/EasyManage/update-trainee/?trainer_id=' . $trainer_id;
-                        ?>
+                        $edit_link = 'http://localhost/EasyManage/update-trainer/' . $trainer_id;
+                ?>
 
                         <tr>
                             <td>
@@ -151,6 +151,7 @@ Template Name: All trainers Page
     .table td:last-child {
         border-right: 1px solid #e6e6e6;
     }
+
     a:hover {
         color: white;
     }
