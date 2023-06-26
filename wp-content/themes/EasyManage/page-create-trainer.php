@@ -111,7 +111,8 @@ Template Name: Create trainer Page
                         </div>
                     </div>
                     <div>
-                        <input type="submit" name="create" value="create" class="btnlog">
+                    <button type="submit" class="btnlog" name="create" value="create">Create</button>
+                        <!-- <input type="submit" name="create" value="create" class="btnlog"> -->
                     </div>
                 </form>
             </div>

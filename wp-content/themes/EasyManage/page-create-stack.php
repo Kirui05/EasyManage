@@ -16,6 +16,70 @@ Template Name: Create stack Page
     ?>
 
     <div class="main-container">
+        <!-- code to create stack -->
+<?php
+    global $success_msg;
+
+    if ($success_msg) {
+        echo "<p id='message'>Stack created successfully</p>";
+        echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+        echo '<script> 
+                setTimeout(function(){
+                    document.getElementById("message").style.display ="none";
+                }, 3000);
+            </script>';
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
+        $stack_name = $_POST['stack_name'];
+        $location = $_POST['location'];
+        $assignee = $_POST['assignee'];
+        $start_date = $_POST['start_date'];
+        $end_date = $_POST['end_date'];
+
+        // Create the stack using the API endpoint
+
+        $body = [
+            'stack_name' => $stack_name,
+            'location' => $location,
+            'assignee' => $assignee,
+            'start_date' => $start_date,
+            'end_date' => $end_date
+        ];
+
+        $args = [
+            'body'        => $body,
+            'timeout'     => '5',
+            // 'redirection' => '5',
+        ];
+
+        $response = $response = wp_remote_post( 'http://localhost/easymanage/wp-json/easymanage/v2/stack', $args );
+        // var_dump($response);
+
+
+        if (!is_wp_error($response)) {
+            $response_data = json_decode(wp_remote_retrieve_body($response), true);
+            // Display success message
+            echo '<p id="message">Stack created successfully</p>';
+            echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+            echo '<script> 
+                    setTimeout(function(){
+                        document.getElementById("message").style.display = "none";
+                    }, 3000); 
+                </script>';
+        } else {
+            // Display error message
+            echo '<p id="message">Error: ' . $response->get_error_message() . '</p>';
+            echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+            echo '<script> 
+                    setTimeout(function(){
+                        document.getElementById("message").style.display = "none";
+                    }, 3000);
+                </script>';
+        }
+    }
+    ?>
+<!-- end -->
         <div class="login">
             <div class="logcover">
                 <form action="" method="POST">
@@ -26,7 +90,7 @@ Template Name: Create stack Page
                             <label for="">Stack name</label>
                             <div class="icons1">
                                 <ion-icon name="logo-stackoverflow"></ion-icon>
-                                <input type="text" placeholder="Enter stack name" name="stack" required>
+                                <input type="text" placeholder="Enter stack name" name="stack_name" required>
                             </div>
                         </div>
                         <div class="input1">
@@ -48,17 +112,17 @@ Template Name: Create stack Page
                             <label for="">Start date</label>
                             <div class="icons1">
                                 <ion-icon name="calendar-outline"></ion-icon>
-                                <input type="date" placeholder="" name="date" min="<?php echo esc_attr(date('Y-m-d')); ?>" required>
+                                <input type="date" placeholder="" name="start_date" min="<?php echo esc_attr(date('Y-m-d')); ?>" required>
                             </div>
                         </div>
                         <div class="input1">
                             <label for="">End date</label>
                             <div class="icons1">
                                 <ion-icon name="calendar-outline"></ion-icon>
-                                <input type="date" placeholder="" name="date" min="<?php echo esc_attr(date('Y-m-d')); ?>" required>
+                                <input type="date" placeholder="" name="end_date" min="<?php echo esc_attr(date('Y-m-d')); ?>" required>
                             </div>
                         </div>
-                        <button type="submit" class="btnlog" name="login-submit">Create</button>
+                        <button type="submit" class="btnlog" name="create" value="create">Create</button>
                     </div>
                 </form>
             </div>

@@ -6,50 +6,49 @@ Template Name: Stacks Page
 
 <?php get_header() ?>
 <main>
-
     <?php get_sidebar() ?>
 
     <div class="main-container">
-
-        <table class="table">
-            <thead>
-                <tr style="color:#008759">
-                    <th>Stack name</th>
-                    <th>Location</th>
-                    <th>Assignee</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                global $wpdb;
-                $stacks = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}stacks", ARRAY_A);
-
-                foreach ($stacks as $stack) {
-                    $stack_name = $stack['stack_name'];
-                    $location = $stack['location'];
-                    $assignee = $stack['assignee'];
-                    $start_date = $stack['start_date'];
-                    $end_date = $stack['end_date'];
-                ?>
-                    <tr>
-                        <td>
-                            <i></i> <?php echo $stack_name; ?>
-                        </td>
-                        <td><?php echo $location; ?></td>
-                        <td><?php echo $assignee; ?></td>
-                        <td><?php echo $start_date; ?></td>
-                        <td><?php echo $end_date; ?></td>
-                        <td>
-                            <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
-                        </td>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr style="color:#008759">
+                        <th>Stack name</th>
+                        <th>Location</th>
+                        <th>Assignee</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Action</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php
+                    global $wpdb;
+                    $stacks = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}stacks", ARRAY_A);
 
+                    foreach ($stacks as $stack) {
+                        $stack_name = $stack['stack_name'];
+                        $location = $stack['location'];
+                        $assignee = $stack['assignee'];
+                        $start_date = $stack['start_date'];
+                        $end_date = $stack['end_date'];
+                    ?>
+                        <tr>
+                            <td>
+                                <i></i> <?php echo $stack_name; ?>
+                            </td>
+                            <td><?php echo $location; ?></td>
+                            <td><?php echo $assignee; ?></td>
+                            <td><?php echo $start_date; ?></td>
+                            <td><?php echo $end_date; ?></td>
+                            <td>
+                                <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </main>
@@ -68,6 +67,11 @@ Template Name: Stacks Page
         width: 100%;
         height: 82vh;
         background-color: #f8f8f8;
+    }
+
+    .table-container {
+        max-height: 100%;
+        overflow: auto;
     }
 
     .table {

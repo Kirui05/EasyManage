@@ -49,16 +49,16 @@ class StacksRoutes
 
         $stack_name = $request->get_param('stack_name');
         $location = $request->get_param('location');
+        $assignee = $request->get_param('assignee');
         $start_date = $request->get_param('start_date');
         $end_date = $request->get_param('end_date');
-        $assignee = $request->get_param('assignee');
 
         $data = array(
             'stack_name' => $stack_name,
             'location' => $location,
+            'assignee' => $assignee,
             'start_date' => $start_date,
             'end_date' => $end_date,
-            'assignee' => $assignee,
         );
 
         $wpdb->insert($table_name, $data);
@@ -114,16 +114,16 @@ class StacksRoutes
         $stack_id = $request->get_param('id');
         $stack_name = $request->get_param('stack_name');
         $location = $request->get_param('location');
+        $assignee = $request->get_param('assignee');
         $start_date = $request->get_param('start_date');
         $end_date = $request->get_param('end_date');
-        $assignee = $request->get_param('assignee');
 
         $data = array(
             'stack_name' => $stack_name,
             'location' => $location,
+            'assignee' => $assignee,
             'start_date' => $start_date,
             'end_date' => $end_date,
-            'assignee' => $assignee,
         );
 
         $where = array('id' => $stack_id);
