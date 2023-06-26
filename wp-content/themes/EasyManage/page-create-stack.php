@@ -8,78 +8,78 @@ Template Name: Create stack Page
 
 <main>
     <?php get_sidebar();
-    $trainers_query = new WP_User_Query([
-        'role' => 'trainer'
-    ]);
-
-    $trainers = $trainers_query->get_results();
+    $trainers = get_users(['role' => 'trainer']);
     ?>
 
     <div class="main-container">
         <!-- code to create stack -->
-<?php
-    global $success_msg;
+        <?php
+        global $success_msg;
 
-    if ($success_msg) {
-        echo "<p id='message'>Stack created successfully</p>";
-        echo '<script> document.getElementById("message").style.display = "flex"; </script>';
-        echo '<script> 
+        if ($success_msg) {
+            echo "<p id='message'>Stack created successfully</p>";
+            echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+            echo '<script> 
                 setTimeout(function(){
                     document.getElementById("message").style.display ="none";
                 }, 3000);
             </script>';
-    }
+        }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
-        $stack_name = $_POST['stack_name'];
-        $location = $_POST['location'];
-        $assignee = $_POST['assignee'];
-        $start_date = $_POST['start_date'];
-        $end_date = $_POST['end_date'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
+            $stack_name = $_POST['stack_name'];
+            $location = $_POST['location'];
+            $assignee_id = $_POST['assignee'];
+            $start_date = $_POST['start_date'];
+            $end_date = $_POST['end_date'];
 
-        // Create the stack using the API endpoint
+            // Get the assignee's name
+            $assignee = get_userdata($assignee_id);
+            $assignee_name = $assignee->display_name;
 
-        $body = [
-            'stack_name' => $stack_name,
-            'location' => $location,
-            'assignee' => $assignee,
-            'start_date' => $start_date,
-            'end_date' => $end_date
-        ];
+            // Create the stack using the API endpoint
 
-        $args = [
-            'body'        => $body,
-            'timeout'     => '5',
-            // 'redirection' => '5',
-        ];
+            $body = [
+                'stack_name' => $stack_name,
+                'location' => $location,
+                'assignee' => $assignee_name,
+                'start_date' => $start_date,
+                'end_date' => $end_date
+            ];
 
-        $response = $response = wp_remote_post( 'http://localhost/easymanage/wp-json/easymanage/v2/stack', $args );
-        // var_dump($response);
+            $args = [
+                'body'        => $body,
+                'timeout'     => '5',
+                // 'redirection' => '5',
+            ];
+
+            $response = $response = wp_remote_post('http://localhost/easymanage/wp-json/easymanage/v2/stack', $args);
+            // var_dump($response);
 
 
-        if (!is_wp_error($response)) {
-            $response_data = json_decode(wp_remote_retrieve_body($response), true);
-            // Display success message
-            echo '<p id="message">Stack created successfully</p>';
-            echo '<script> document.getElementById("message").style.display = "flex"; </script>';
-            echo '<script> 
+            if (!is_wp_error($response)) {
+                $response_data = json_decode(wp_remote_retrieve_body($response), true);
+                // Display success message
+                echo '<p id="message">Stack created successfully</p>';
+                echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+                echo '<script> 
                     setTimeout(function(){
                         document.getElementById("message").style.display = "none";
                     }, 3000); 
                 </script>';
-        } else {
-            // Display error message
-            echo '<p id="message">Error: ' . $response->get_error_message() . '</p>';
-            echo '<script> document.getElementById("message").style.display = "flex"; </script>';
-            echo '<script> 
+            } else {
+                // Display error message
+                echo '<p id="message">Error: ' . $response->get_error_message() . '</p>';
+                echo '<script> document.getElementById("message").style.display = "flex"; </script>';
+                echo '<script> 
                     setTimeout(function(){
                         document.getElementById("message").style.display = "none";
                     }, 3000);
                 </script>';
+            }
         }
-    }
-    ?>
-<!-- end -->
+        ?>
+        <!-- end -->
         <div class="login">
             <div class="logcover">
                 <form action="" method="POST">
@@ -103,8 +103,11 @@ Template Name: Create stack Page
                         <div class="input1">
                             <label for="">Assignee</label>
                             <select class="assignee" id="assignee" name="assignee" multiple>
-                                <?php foreach ($trainers as $trainer) : ?>
-                                    <option value="<?php echo esc_attr($trainer->ID); ?>"><?php echo esc_html($trainer->display_name); ?></option>
+                                <?php foreach ($trainers as $trainer) :
+                                    $trainer_name = $trainer->display_name;
+                                    $trainer_id = $trainer->ID;
+                                ?>
+                                    <option value="<?php echo esc_attr($trainer_id); ?>"><?php echo esc_html($trainer_name); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
