@@ -1,5 +1,4 @@
 <?php
-
 //
 function easymanage_script_enqueue()
 {
@@ -72,3 +71,59 @@ function add_custom_roles()
 add_action('init', 'add_custom_roles');
 
 add_filter('show_admin_bar', '__return_false');
+
+// shortcode to view all users
+function display_table_shortcode()
+{
+    ob_start();
+?>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr style="color:#008759">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $users = get_users(); // Retrieve all users
+                $current_user = wp_get_current_user(); // Get the current user
+                $current_user_roles = $current_user->roles; // Get the roles of the current user
+
+                foreach ($users as $user) {
+                    $name = $user->display_name;
+                    $email = $user->user_email;
+                    $role = implode(', ', $user->roles);
+                    $status = 'Active'; // Assuming all users are active
+
+                ?>
+                    <tr>
+                        <td><i style="color:#000;" class="bi bi-person-circle"></i> <?php echo esc_html($name); ?></td>
+                        <td><?php echo esc_html($email); ?></td>
+                        <td><?php echo esc_html($role); ?></td>
+                        <td><span class="badge bg-success text-white"><?php echo esc_html($status); ?></span></td>
+                        <td>
+                            <?php if (in_array('program_manager', $current_user_roles) && $role !== 'administrator' && $role !== 'program_manager') : ?>
+                                <a href="#"><i style="color:#000;" class="bi bi-pencil-square"></i></a>
+                            <?php elseif (in_array('trainer', $current_user_roles) && in_array('trainee', $user->roles)) : ?>
+                                <a href="#"><i style="color:#000;" class="bi bi-pencil-square"></i></a>
+                            <?php elseif (in_array('administrator', $current_user_roles) && $role !== 'administrator') : ?>
+                                <a href="#"><i style="color:#000;" class="bi bi-pencil-square"></i></a>
+                                <a href="#"><i style="color:#000;" class="bi bi-person-x"></i></a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+<?php
+    return ob_get_clean();
+}
+add_shortcode('display_table', 'display_table_shortcode');

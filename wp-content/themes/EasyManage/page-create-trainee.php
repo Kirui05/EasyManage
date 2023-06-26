@@ -7,8 +7,12 @@ Template Name: Create trainee Page
 <?php get_header() ?>
 
 <main>
-    <!-- code to add trainee -->
-    <?php
+   
+    <?php get_sidebar() ?>
+
+    <div class="main-container">
+ <!-- code to add trainee -->
+ <?php
     global $success_msg;
 
     if ($success_msg) {
@@ -21,7 +25,7 @@ Template Name: Create trainee Page
             </script>';
     }
 
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['create'])) {
         $trainee_name = $_POST['trainee_name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -64,10 +68,6 @@ Template Name: Create trainee Page
     }
     ?>
     <!-- end -->
-    <?php get_sidebar() ?>
-
-    <div class="main-container">
-
         <!-- Create trainee form -->
         <div class="login">
             <div class="logcover">

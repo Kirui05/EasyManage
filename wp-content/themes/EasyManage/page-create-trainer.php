@@ -9,7 +9,7 @@ Template Name: Create trainer Page
     <?php get_sidebar() ?>
 
     <div class="main-container">
-<!-- code to create trainer -->
+       <!-- code to create trainer -->
 <?php
     global $success_msg;
 
@@ -23,17 +23,17 @@ Template Name: Create trainer Page
             </script>';
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
         $trainer_name = $_POST['trainer_name'];
+        $stack = $_POST['stack'];
         $email = $_POST['email'];
         $password = $_POST['password'];
 
         // Create the trainer using the API endpoint
 
-
-
         $body = [
             'trainer_name' => $trainer_name,
+            'stack' => $stack,
             'email' => $email,
             'password' => $password
         ];
@@ -41,7 +41,7 @@ Template Name: Create trainer Page
         $args = [
             'body'        => $body,
             'timeout'     => '5',
-            'redirection' => '5',
+            // 'redirection' => '5',
         ];
 
         $response = $response = wp_remote_post( 'http://localhost/EasyManage/wp-json/easymanage/v2/trainer', $args );
@@ -75,7 +75,6 @@ Template Name: Create trainer Page
         <!-- Create trainer form -->
         <div class="login">
             <div class="logcover">
-
                 <form class="form" method="post" action="">
                     <h2>Create Trainer</h2>
                     <div class="input1">
@@ -88,10 +87,13 @@ Template Name: Create trainer Page
                     <div class="input1">
                         <label for="stack">Stack</label>
                         <select class="stack" id="stack" name="stack">
-                            <option value="stack1">WordPress</option>
-                            <option value="stack2">Angular</option>
-                            <option value="stack3">C#</option>
-                            <option value="stack3">QA/QE</option>
+                            <?php
+                            global $wpdb;
+                            $stacks = $wpdb->get_results("SELECT * FROM wp_stacks");
+                            foreach ($stacks as $stack) {
+                                echo '<option value="' . $stack->id . '">' . $stack->stack_name . '</option>';
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="input1">
