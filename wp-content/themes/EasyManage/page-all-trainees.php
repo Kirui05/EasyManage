@@ -43,7 +43,7 @@ Template Name: All trainees Page
                             <td><?php echo $trainee->user_email; ?></td>
                             <td><?php echo ucfirst($role); ?></td>
                             <td>
-                                <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
+                                <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/?trainee_id=<?php echo get_user_by('email', $trainee->user_email)->ID; ?>"></a>
                             </td>
                         </tr>
                     <?php

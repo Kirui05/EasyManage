@@ -11,7 +11,7 @@ Template Name: Create trainee Page
     <?php get_sidebar() ?>
 
     <div class="main-container">
- <!-- code to add trainee -->
+ <!-- code to create trainee -->
  <?php
     global $success_msg;
 

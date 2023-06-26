@@ -10,7 +10,7 @@ Template Name: Create program manager Page
 
     <?php get_sidebar() ?>
     <div class="main-container">
-        <!-- code to send data to database -->
+        <!-- code to create program manager -->
         <?php
         global $success_msg;
 
