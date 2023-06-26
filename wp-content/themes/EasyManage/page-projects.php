@@ -11,40 +11,48 @@ Template Name: Projects Page
 
     <div class="main-container">
 
-        <table class="table">
-            <thead>
-                <tr style="color:#008759">
-                    <th>Project name</th>
-                    <th>Due date</th>
-                    <th>Project description</th>
-                    <th>Assignee</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                global $wpdb;
-
-                $projects = $wpdb->get_results("SELECT * FROM wp_projects");
-
-                foreach ($projects as $project) {
-                ?>
-                    <tr>
-                        <td>
-                            <i></i><?php echo $project->project_name; ?>
-                        </td>
-                        <td><?php echo $project->due_date; ?></td>
-                        <td><?php echo $project->project_description; ?></td>
-                        <td><?php echo $project->assignee; ?></td>
-                        <td>
-                            <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
-                        </td>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr style="color:#008759">
+                        <th>Project name</th>
+                        <th>Due date</th>
+                        <th>Description</th>
+                        <th>Assignee</th>
+                        <th>Action</th>
                     </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php
+                    global $wpdb;
+
+                    $projects = $wpdb->get_results("SELECT * FROM wp_projects");
+
+                    foreach ($projects as $project) {
+                    ?>
+                        <tr>
+                            <td>
+                                <i></i><?php echo $project->project_name; ?>
+                            </td>
+                            <td><?php echo $project->due_date; ?></td>
+                            <td>
+                                <?php
+                                $description = $project->project_description;
+                                $truncated_description = strlen($description) > 50 ? substr($description, 0, 50) . '...' : $description;
+                                echo $truncated_description;
+                                ?>
+                            </td>
+                            <td><?php echo $project->assignee; ?></td>
+                            <td>
+                                <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
@@ -64,6 +72,11 @@ Template Name: Projects Page
         width: 100%;
         height: 82vh;
         background-color: #f8f8f8;
+    }
+
+    .table-container {
+        max-height: 100%;
+        overflow-y: auto;
     }
 
     .table {
