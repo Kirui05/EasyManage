@@ -17,23 +17,6 @@ Template Name: Update trainer Page
                 <form action="" method="POST">
                     <div class="form">
                         <h2>Update Trainer</h2>
-
-                        <?php
-                        if (isset($_POST['update-trainer'])) {
-                            // Get the current user ID
-                            $user_id = get_current_user_id();
-
-                            // Update the user meta fields
-                            update_user_meta($user_id, 'display_name', $_POST['name']);
-                            update_user_meta($user_id, 'user_email', $_POST['email']);
-                            update_user_meta($user_id, 'phone_number', $_POST['number']);
-                            update_user_meta($user_id, 'trainer_stack', $_POST['stack']);
-
-                            wp_redirect('http://localhost/EasyManage/all-trainers/');
-                            exit;
-                        }
-                        ?>
-
                         <div class="input1">
                             <label for="name">Trainer name</label>
                             <div class="icons1">
