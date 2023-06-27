@@ -44,7 +44,7 @@ Template Name: Projects Page
                             </td>
                             <td><?php echo $project->assignee; ?></td>
                             <td>
-                                <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-trainee/"></a>
+                                <a style="color:#000;margin-right:5px;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-project/?project_id="></a>
                             </td>
                         </tr>
                     <?php
