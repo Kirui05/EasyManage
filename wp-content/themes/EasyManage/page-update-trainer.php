@@ -1,9 +1,4 @@
 <?php
-
-if (isset($_POST['update-trainer'])) {
-    update_user_meta(get_current_user_id(), 'update_trainer', $_POST['']);
-    wp_redirect('http://localhost/EasyManage/all-trainers/');
-}
 /*
 Template Name: Update trainer Page
 */
@@ -23,8 +18,24 @@ Template Name: Update trainer Page
                     <div class="form">
                         <h2>Update Trainer</h2>
 
+                        <?php
+                        if (isset($_POST['update-trainer'])) {
+                            // Get the current user ID
+                            $user_id = get_current_user_id();
+
+                            // Update the user meta fields
+                            update_user_meta($user_id, 'display_name', $_POST['name']);
+                            update_user_meta($user_id, 'user_email', $_POST['email']);
+                            update_user_meta($user_id, 'phone_number', $_POST['number']);
+                            update_user_meta($user_id, 'trainer_stack', $_POST['stack']);
+
+                            wp_redirect('http://localhost/EasyManage/all-trainers/');
+                            exit;
+                        }
+                        ?>
+
                         <div class="input1">
-                            <label for="">Trainer name</label>
+                            <label for="name">Trainer name</label>
                             <div class="icons1">
                                 <ion-icon name="person-outline"></ion-icon>
                                 <input type="text" placeholder="Enter trainer name" name="name" required>
@@ -33,26 +44,32 @@ Template Name: Update trainer Page
                         <div class="input1">
                             <label for="stack">Stack</label>
                             <select class="stack" id="stack" name="stack">
-                                <option value="stack1">Stack 1</option>
-                                <option value="stack2">Stack 2</option>
-                                <option value="stack3">Stack 3</option>
+                                <?php
+                                global $wpdb;
+                                $stacks = $wpdb->get_results("SELECT * FROM wp_stacks");
+                                foreach ($stacks as $stack) {
+                                    echo '<option value="' . $stack->id . '">' . $stack->stack_name . '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="input1">
-                            <label for="">Email address</label>
+                            <label for="email">Email address</label>
                             <div class="icons1">
                                 <ion-icon name="mail-outline"></ion-icon>
                                 <input type="text" placeholder="Enter email address" name="email" required>
                             </div>
                         </div>
                         <div class="input1">
-                            <label for="">Phone number</label>
+                            <label for="password">Password</label>
                             <div class="icons1">
-                                <ion-icon name="call-outline"></ion-icon>
-                                <input type="number" placeholder="Enter phone number" name="number" required>
+                                <ion-icon name="lock-closed-outline"></ion-icon>
+                                <input placeholder="Enter password" type="password" name="password" id="password" value="<?php echo $user_pass; ?>" />
                             </div>
                         </div>
-                        <button type="submit" class="btnlog" name="update-trainer">Update</button>
+                        <div>
+                            <input type="submit" name="update" value="Update" class="btnlog">
+                        </div>
                     </div>
                 </form>
             </div>
