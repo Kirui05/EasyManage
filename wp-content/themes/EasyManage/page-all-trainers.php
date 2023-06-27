@@ -36,7 +36,7 @@ Template Name: All trainers Page
                         $trainer_email = $trainer->user_email;
                         $trainer_role = 'Trainer';
                         $trainer_id = $trainer->ID;
-                        $edit_link = 'http://localhost/EasyManage/update-trainer/' . $trainer_id;
+                        $edit_link = 'http://localhost/EasyManage/update-trainer?trainer_id=' . $trainer_id;
                 ?>
 
                         <tr>

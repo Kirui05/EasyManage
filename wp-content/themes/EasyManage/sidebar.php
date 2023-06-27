@@ -8,14 +8,14 @@ $user_roles = $user->roles;
 $admin_menu = array(
     array('icon' => 'bi bi-grid', 'text' => 'Dashboard', 'link' => 'http://localhost/EasyManage/dashboard/'),
     array('icon' => 'bi bi-people', 'text' => 'View All Users', 'link' => 'http://localhost/EasyManage/all-users/'),
-    array('icon' => 'bi bi-layers', 'text' => 'View all Stacks', 'link' => 'http://localhost/EasyManage/stacks/'),
+    array('icon' => 'bi bi-people', 'text' => 'View All Program Managers', 'link' => 'http://localhost/EasyManage/all-program-managers/'),
     array('icon' => 'bi bi-person-plus', 'text' => 'Create Program Manager', 'link' => 'http://localhost/EasyManage/create-program-manager/'),
 );
 
 $program_manager_menu = array(
     array('icon' => 'bi bi-grid', 'text' => 'Dashboard', 'link' => 'http://localhost/EasyManage/pm-dashboard/'),
     array('icon' => 'bi bi-people', 'text' => 'View All Trainers', 'link' => 'http://localhost/EasyManage/all-trainers/'),
-    array('icon' => 'bi bi-layers', 'text' => 'View all Stacks', 'link' => 'http://localhost/EasyManage/stacks/'),
+    array('icon' => 'bi bi-layers', 'text' => 'View All Stacks', 'link' => 'http://localhost/EasyManage/stacks/'),
     array('icon' => 'bi bi-person-plus', 'text' => 'Create Trainer', 'link' => 'http://localhost/EasyManage/create-trainer/'),
     array('icon' => 'bi bi-layers', 'text' => 'Create Stack', 'link' => 'http://localhost/EasyManage/create-stack/'),
 );

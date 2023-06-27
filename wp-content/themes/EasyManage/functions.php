@@ -109,8 +109,10 @@ function display_table_shortcode()
                         <td><?php echo esc_html($role); ?></td>
                         <td><span class="badge bg-success text-white"><?php echo esc_html($status); ?></span></td>
                         <td>
-                            <?php if ($show_pencil_icon) : ?>
-                                <a href="http://localhost/EasyManage/update-program-manager/"><i style="color:#000;" class="bi bi-pencil-square"></i></a>
+                        <?php if (in_array('program_manager', $current_user_roles) && $role !== 'administrator' && $role !== 'program_manager') : ?>
+                            <?php elseif (in_array('trainer', $current_user_roles) && in_array('trainee', $user->roles)) : ?>
+                            <?php elseif (in_array('administrator', $current_user_roles) && $role !== 'administrator') : ?>
+                                <a href="#"><i style="color:#000;" class="bi bi-person-x"></i></a>
                             <?php endif; ?>
                         </td>
                     </tr>
