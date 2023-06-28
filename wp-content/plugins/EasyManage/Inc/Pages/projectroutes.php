@@ -39,7 +39,7 @@ class projectroutes
             // }
         ));
 
-        register_rest_route('easymanage/v2', '/project/(?P<id>\d+)', array(
+        register_rest_route('easymanage/v2', '/project/(?P<project_id>\d+)', array(
             'methods' => 'PATCH',
             'callback' => array($this, 'update_project'),
         ));

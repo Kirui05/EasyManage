@@ -10,7 +10,6 @@ $error_message = '';
 $emailError = $passwordError = '';
 
 // Tracking login attempts
-
 function track_login_attempts($username, $password)
 {
     if (!session_id()) {
@@ -22,7 +21,6 @@ function track_login_attempts($username, $password)
     $_SESSION['login_attempts']++;
 
     // Checking if the maximum no. of login attempts has been reached
-
     if ($_SESSION['login_attempts'] >= 5) {
         if (isset($_SESSION['login_attempt_time']) && time() - $_SESSION['login_attempt_time'] < 30) {
             wp_die('Too many login attempts. Please try again after 30 seconds.');
@@ -55,7 +53,6 @@ if (is_user_logged_in()) {
 
 if (isset($_POST['login'])) {
     // Validation code for the login form
-
     if (empty($_POST['email'])) {
         $emailError = "* Email is required!";
     }
@@ -68,7 +65,6 @@ if (isset($_POST['login'])) {
     $user_password = $_POST['password'];
 
     // Calling the track_login_attempts function passing the username and password
-
     track_login_attempts($employee_id, $user_password);
     $user = get_user_by('email', $employee_id);
     if (!$user) {
@@ -76,42 +72,54 @@ if (isset($_POST['login'])) {
     } elseif (!wp_check_password($user_password, $user->user_pass, $user->ID)) {
         $error_message = "* Invalid password.";
     } else {
-        wp_set_current_user($user->ID);
-        wp_set_auth_cookie($user->ID);
-        do_action('wp_login', $user->user_login, $user);
-        $user_roles = $user->roles;
-        $redirect_url = '';
+        $is_deactivated = get_user_meta($user->ID, 'is_deactivated', true);
 
-        if (in_array('administrator', $user_roles)) {
-            $redirect_url = 'http://localhost/EasyManage/dashboard/';
-        } elseif (in_array('program_manager', $user_roles)) {
-            $redirect_url = 'http://localhost/EasyManage/PM-dashboard/';
-        } elseif (in_array('trainer', $user_roles)) {
-            $redirect_url = 'http://localhost/EasyManage/trainer-dashboard/';
-        } elseif (in_array('trainee', $user_roles)) {
-            $redirect_url = 'http://localhost/EasyManage/trainee-dashboard/';
+        if ($is_deactivated == 1) {
+            $error_message = "Account deactivated!";
+        } else {
+            wp_set_current_user($user->ID);
+            wp_set_auth_cookie($user->ID);
+            do_action('wp_login', $user->user_login, $user);
+            $user_roles = $user->roles;
+            $redirect_url = '';
+
+            if (in_array('administrator', $user_roles)) {
+                $redirect_url = 'http://localhost/EasyManage/dashboard/';
+            } elseif (in_array('program_manager', $user_roles)) {
+                $redirect_url = 'http://localhost/EasyManage/PM-dashboard/';
+            } elseif (in_array('trainer', $user_roles)) {
+                $redirect_url = 'http://localhost/EasyManage/trainer-dashboard/';
+            } elseif (in_array('trainee', $user_roles)) {
+                $redirect_url = 'http://localhost/EasyManage/trainee-dashboard/';
+            }
+
+            $redirect_url .= '?user_id=' . $user->ID;
+            wp_redirect($redirect_url);
+            exit;
         }
-
-        $redirect_url .= '?user_id=' . $user->ID;
-        wp_redirect($redirect_url);
-        exit;
     }
 }
 
-
-
+// validating login form
+function validate_login_form($username, $password)
+{
+    $user = get_user_by('email', $username);
+    if ($user) {
+        $is_deactivated = get_user_meta($user->ID, 'is_deactivated', true);
+        if ($is_deactivated == 1) {
+            $error_message = "Account deactivated. Please contact support.";
+            return new WP_Error('deactivated_account', $error_message);
+        }
+    }
+    return null;
+}
 add_action('login_form_validate', 'validate_login_form');
 
-?>
-
-<!-- validating login form -->
-<?php
 wp_head();
 get_header();
 ?>
 
 <div class="main-container">
-
     <!-- Login form -->
     <div class="login">
         <div class="logcover">
@@ -124,9 +132,9 @@ get_header();
                     <h2>Login</h2>
 
                     <?php if ($error_message) : ?>
-                    <?php if ((!empty($user_password)) AND (!empty($employee_id))) : ?>
-                        <div class="error-message"><?php echo $error_message; ?></div>
-                    <?php endif; ?>
+                        <?php if ((!empty($user_password)) AND (!empty($employee_id))) : ?>
+                            <div class="error-message"><?php echo $error_message; ?></div>
+                        <?php endif; ?>
                     <?php endif; ?>
 
                     <div class="input1">
@@ -150,7 +158,6 @@ get_header();
             </form>
         </div>
     </div>
-
 </div>
 
 <style>

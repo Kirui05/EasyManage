@@ -68,7 +68,7 @@ function display_table_shortcode()
     <div class="container">
         <table class="table">
             <thead>
-                <tr>
+                <tr style="color:#008759;">
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
@@ -181,4 +181,19 @@ function toggle_user_status_ajax_callback()
     update_user_meta($user_id, 'is_deactivated', $is_deactivated);
 
     wp_send_json_success();
+}
+
+
+function get_trainee_projects(){
+    $user = get_current_user_id(); 
+    $res = wp_remote_get("http://localhost/EasyManage/wp-json/easymanage/v2/assigneeprojects?u=$user", [
+        'method' => 'GET'
+    ]);
+
+    $res_body = wp_remote_retrieve_body($res);
+
+    $output = json_decode($res_body);
+
+    return $output;
+
 }
