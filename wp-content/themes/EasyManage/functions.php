@@ -1,59 +1,39 @@
 <?php
-// Enqueue styles and scripts
-function easymanage_script_enqueue()
+//
+function easyManage_script_enqueue()
 {
     wp_enqueue_style('customstyle', get_template_directory_uri() . '/custom/styles.css', [], '3.1.1', 'all');
     wp_enqueue_script('customjs', get_template_directory_uri() . '/custom/script.js', [], '1.0.0', true);
 
-    // Bootstrap
+    // introducing bootstrap
     wp_register_style('bootstrapcss', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css', [], '5.2.3', 'all');
+
     wp_enqueue_style('bootstrapcss');
 
     wp_register_script('jsbootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js', [], '5.2.3', false);
     wp_enqueue_script('jsbootstrap');
+    wp_enqueue_script('jquery');
 }
 
-add_action('wp_enqueue_scripts', 'easymanage_script_enqueue');
+add_action('wp_enqueue_scripts', 'easyManage_script_enqueue');
+add_filter('show_admin_bar', '__return_false');
+// custom logout
 
-// Custom logout redirect
-function custom_logout_redirect()
-{
-    wp_redirect('http://localhost/easymanage/');
-    exit;
-}
+// function custom_logout_redirect() {
+//     wp_redirect('http://localhost/easymanage/');
+//     exit;
+// }
+// add_action('wp_logout', 'custom_logout_redirect');
 
-add_action('wp_logout', 'custom_logout_redirect');
-
-// Validation
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
-    return $data;
-}
-
-add_action('init', 'add_custom_roles');
-
-// Adding new user roles
+// Add new user roles
 function add_custom_roles()
 {
-    add_role(
-        'program_manager',
-        __('Program Manager'),
-        array(
-            'read' => true,
-            'edit_posts' => true,
-            'delete_posts' => true,
-        )
-    );
-
     add_role(
         'trainer',
         __('Trainer'),
         array(
-            'read' => true,
-            'edit_posts' => true,
+            'read'         => true,
+            'edit_posts'   => true,
             'delete_posts' => true,
         )
     );
@@ -62,24 +42,33 @@ function add_custom_roles()
         'trainee',
         __('Trainee'),
         array(
-            'read' => true,
-            'edit_posts' => false,
+            'read'         => true,
+            'edit_posts'   => false,
             'delete_posts' => false,
         )
     );
+
+    add_role(
+        'program_manager',
+        __('Program Manager'),
+        array(
+            'read'         => true,
+            'edit_posts'   => true,
+            'delete_posts' => true,
+        )
+    );
 }
+add_action('init', 'add_custom_roles');
 
-add_filter('show_admin_bar', '__return_false');
 
-// Shortcode to view all users
 function display_table_shortcode()
 {
     ob_start();
-    ?>
+?>
     <div class="container">
         <table class="table">
             <thead>
-                <tr style="color:#008759">
+                <tr>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
@@ -97,22 +86,25 @@ function display_table_shortcode()
                     $name = $user->display_name;
                     $email = $user->user_email;
                     $role = implode(', ', $user->roles);
-                    $status = 'Active'; // Assuming all users are active
-
-                    // Check if the current user is an administrator and the user's role is "program_manager"
-                    $show_pencil_icon = in_array('administrator', $current_user_roles) && $role === 'program_manager';
-
-                    ?>
+                    $is_deactivated = get_user_meta($user->ID, 'is_deactivated', true);
+                    $status = ($is_deactivated == 1) ? 'Inactive' : 'Active';
+                    $status_class = ($is_deactivated == 1) ? 'bg-danger text-white' : 'bg-success text-white';
+                    $toggle_action = ($is_deactivated == 1) ? 'activate' : 'deactivate';
+                    $toggle_icon = ($is_deactivated == 1) ? 'bi-play-fill' : 'bi-square-fill';
+                ?>
                     <tr>
-                        <td><i style="color:#000;" class="bi bi-person-circle"></i> <?php echo esc_html($name); ?></td>
+                        <td> <?php echo esc_html($name); ?></td>
                         <td><?php echo esc_html($email); ?></td>
                         <td><?php echo esc_html($role); ?></td>
-                        <td><span class="badge bg-success text-white"><?php echo esc_html($status); ?></span></td>
+                        <td><span class="badge <?php echo esc_attr($status_class); ?>"><?php echo esc_html($status); ?></span></td>
                         <td>
-                        <?php if (in_array('program_manager', $current_user_roles) && $role !== 'administrator' && $role !== 'program_manager') : ?>
+                            <?php if (in_array('program_manager', $current_user_roles) && $role !== 'administrator' && $role !== 'program_manager') : ?>
+                                <!-- <a href="#"><i class="bi bi-pencil-square text-dark"></i></a> -->
                             <?php elseif (in_array('trainer', $current_user_roles) && in_array('trainee', $user->roles)) : ?>
+                                <!-- <a href="#"><i class="bi bi-pencil-square text-dark"></i></a> -->
                             <?php elseif (in_array('administrator', $current_user_roles) && $role !== 'administrator') : ?>
-                                <a href="#"><i style="color:#008759;" class="bi bi-square-fill"></i></a>
+                                <!-- <a href="#"><i class="bi bi-pencil-square text-dark"></i></a> -->
+                                <a href="#" class="toggle-user" data-user-id="<?php echo esc_attr($user->ID); ?>" data-action="<?php echo esc_attr($toggle_action); ?>"><i class="bi <?php echo esc_attr($toggle_icon); ?> text-success"></i></a>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -122,38 +114,71 @@ function display_table_shortcode()
             </tbody>
         </table>
     </div>
-    <?php
+
+    <script>
+        (function($) {
+            $(document).ready(function() {
+                $('.toggle-user').on('click', function(e) {
+                    e.preventDefault();
+                    var userId = $(this).data('user-id');
+                    var action = $(this).data('action');
+                    var icon = $(this).find('i');
+
+                    // Make an AJAX request to update the is_deactivated value
+                    $.ajax({
+                        url: '<?php echo admin_url("admin-ajax.php"); ?>',
+                        type: 'POST',
+                        data: {
+                            action: 'toggle_user_status',
+                            user_id: userId,
+                            action_type: action
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                // Toggle the status and icon based on the updated value
+                                if (action === 'deactivate') {
+                                    icon.removeClass('bi-square-fill').addClass('bi-play-fill');
+                                    icon.closest('tr').find('.badge').removeClass('bg-success').addClass('bg-danger').text('Inactive');
+                                } else {
+                                    icon.removeClass('bi-play-fill').addClass('bi-square-fill');
+                                    icon.closest('tr').find('.badge').removeClass('bg-danger').addClass('bg-success').text('Active');
+                                }
+                            } else {
+                                console.log('Error:', response.data.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('AJAX Error:', error);
+                        }
+                    });
+                });
+            });
+        })(jQuery);
+    </script>
+<?php
     return ob_get_clean();
 }
-
 add_shortcode('display_table', 'display_table_shortcode');
 
-function get_trainee_tasks(){
-    $args = [
-        'method' => 'GET',
-        'headers' => [
-            'Content-Type' => 'application/json'
-        ]
-        ];
-
-    $results = wp_remote_request('http://localhost/EasyManage/wp-json/easymanage/v2/assigneeprojects', $args);
-
-    if (is_wp_error($results)){
-        $error_msg = $results->get_error_message();
-        echo 'Err: ' . $error_msg;
-        return;
+// AJAX callback to handle the user status toggle
+add_action('wp_ajax_toggle_user_status', 'toggle_user_status_ajax_callback');
+add_action('wp_ajax_nopriv_toggle_user_status', 'toggle_user_status_ajax_callback');
+function toggle_user_status_ajax_callback()
+{
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error('Unauthorized', 403);
     }
 
-    $response_code = wp_remote_retrieve_response_code($results);
-    $results_body = wp_remote_retrieve_body($results);
+    $user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : 0;
+    $action_type = isset($_POST['action_type']) ? sanitize_text_field($_POST['action_type']) : '';
 
-    if($response_code === 200){
-        $tasks_data = json_encode($results_body);
-        
-        return $tasks_data;
-    } else {
-        echo ' Err: ' . $response_code. '<br>';
-        echo ' Result body: ' . $results_body. '<br>';
-        return "No assigned tasks found";
+    if (!$user_id || !in_array($action_type, array('activate', 'deactivate'))) {
+        wp_send_json_error('Invalid request');
     }
+
+    // Update the is_deactivated value for the user
+    $is_deactivated = ($action_type === 'deactivate') ? 1 : 0;
+    update_user_meta($user_id, 'is_deactivated', $is_deactivated);
+
+    wp_send_json_success();
 }
