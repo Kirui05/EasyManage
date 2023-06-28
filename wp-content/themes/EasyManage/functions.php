@@ -127,3 +127,33 @@ function display_table_shortcode()
 }
 
 add_shortcode('display_table', 'display_table_shortcode');
+
+function get_trainee_tasks(){
+    $args = [
+        'method' => 'GET',
+        'headers' => [
+            'Content-Type' => 'application/json'
+        ]
+        ];
+
+    $results = wp_remote_request('http://localhost/EasyManage/wp-json/easymanage/v2/assigneeprojects', $args);
+
+    if (is_wp_error($results)){
+        $error_msg = $results->get_error_message();
+        echo 'Err: ' . $error_msg;
+        return;
+    }
+
+    $response_code = wp_remote_retrieve_response_code($results);
+    $results_body = wp_remote_retrieve_body($results);
+
+    if($response_code === 200){
+        $tasks_data = json_encode($results_body);
+        
+        return $tasks_data;
+    } else {
+        echo ' Err: ' . $response_code. '<br>';
+        echo ' Result body: ' . $results_body. '<br>';
+        return "No assigned tasks found";
+    }
+}

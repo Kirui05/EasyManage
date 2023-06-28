@@ -53,7 +53,6 @@ Template Name: Create project Page
                 'project_description' => $project_description,
                 'assignee' => implode(', ', $assignees), // Convert the array to a string
             ];
-
             $args = [
                 'body'        => $body,
                 'timeout'     => '5',

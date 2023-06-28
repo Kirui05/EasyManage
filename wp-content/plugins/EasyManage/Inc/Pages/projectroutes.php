@@ -31,6 +31,14 @@ class projectroutes
             'callback' => array($this, 'get_all_projects'),
         ));
 
+        register_rest_route('easymanage/v2', '/assigneeprojects', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'trainee_get_tasks'),
+            // 'permission_callback' => function () {
+            //     return current_user_can('trainee');
+            // }
+        ));
+
         register_rest_route('easymanage/v2', '/project/(?P<id>\d+)', array(
             'methods' => 'PATCH',
             'callback' => array($this, 'update_project'),
@@ -125,4 +133,26 @@ class projectroutes
 
         return rest_ensure_response($data);
     }
+
+    public function trainee_get_tasks() {
+        $trainee = wp_get_current_user();
+        $trainee_name = $trainee->user_login;
+    
+        global $wpdb;
+        $table = $wpdb->prefix . 'projects';
+    
+        $tasks = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM $table WHERE assignee LIKE %s",
+                '%' . $trainee_name . '%'
+            )
+        );
+    
+        if ($tasks) {
+            return $tasks;
+        } else {
+            return new \WP_Error('cant_get_tasks', "Unable to get tasks", array('status' => 404));
+        }
+    }
+    
 }
