@@ -17,9 +17,16 @@ Template Name: User card page
 
         <div class="card">
             <h2>User Details</h2>
-            <p><strong>Name:</strong> John Doe</p>
-            <p><strong>Email:</strong> john.doe@example.com</p>
-            <p><strong>Role:</strong> Developer</p>
+            <?php
+                // Retrieve current user data
+                $current_user = wp_get_current_user();
+                $user_name = $current_user->display_name;
+                $user_email = $current_user->user_email;
+                $user_role = implode(', ', $current_user->roles);
+            ?>
+            <p><strong>Name:</strong> <?php echo $user_name; ?></p>
+            <p><strong>Email:</strong> <?php echo $user_email; ?></p>
+            <p><strong>Role:</strong> <?php echo $user_role; ?></p>
         </div>
 
     </div>
