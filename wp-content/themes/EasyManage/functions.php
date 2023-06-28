@@ -112,7 +112,7 @@ function display_table_shortcode()
                         <?php if (in_array('program_manager', $current_user_roles) && $role !== 'administrator' && $role !== 'program_manager') : ?>
                             <?php elseif (in_array('trainer', $current_user_roles) && in_array('trainee', $user->roles)) : ?>
                             <?php elseif (in_array('administrator', $current_user_roles) && $role !== 'administrator') : ?>
-                                <a href="#"><i style="color:#000;" class="bi bi-person-x"></i></a>
+                                <a href="#"><i style="color:#008759;" class="bi bi-square-fill"></i></a>
                             <?php endif; ?>
                         </td>
                     </tr>
