@@ -10,7 +10,13 @@ Template Name: Update project Page
 
 <main>
     <?php get_sidebar() ?>
+    <?php get_sidebar(); 
+    $trainees_query = new WP_User_Query([
+        'role' => 'trainee'
+    ]);
 
+    $trainees = $trainees_query->get_results();
+    ?>
     <div class="main-container">
 
         <?php
@@ -29,18 +35,18 @@ Template Name: Update project Page
                 'due_date' => $_POST['date'],
                 'assignee' => $_POST['assignee']
             );
-        
+
             // Update the project data using the updated_data array
-        
+
             // Send the updated data to the update project route
-            $response = wp_remote_post('http://localhost/EasyManage/wp-json/easymanage/v2/project/'.$project_id, array(
+            $response = wp_remote_post('http://localhost/EasyManage/wp-json/easymanage/v2/project/' . $project_id, array(
                 'method' => 'PATCH',
                 'headers' => array(
                     'Content-Type' => 'application/json',
                 ),
                 'body' => json_encode($updated_data),
             ));
-        
+
             // Check if the update was successful
             if (is_wp_error($response)) {
                 // Handle the error case
@@ -93,10 +99,11 @@ Template Name: Update project Page
                         </div>
                         <div class="input1">
                             <label for="">Assignee</label>
-                            <div class="icons1">
-                                <ion-icon name="person-outline"></ion-icon>
-                                <input type="text" placeholder="Enter assignee" name="assignee" value="<?php echo isset($assignee) ? $assignee : ''; ?>" required>
-                            </div>
+                            <select class="assignee" id="assignee" name="assignee" multiple> <!-- Updated name and added [] to make it an array -->
+                                <?php foreach ($trainees as $trainee) : ?>
+                                    <option value="<?php echo esc_attr($trainee->display_name); ?>"><?php echo esc_html($trainee->display_name); ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div>
                             <input type="submit" name="update" value="Update" class="btnlog">
