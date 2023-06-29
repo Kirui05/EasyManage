@@ -32,6 +32,7 @@ Template Name: Stacks Page
                         $assignee = $stack['assignee'];
                         $start_date = $stack['start_date'];
                         $end_date = $stack['end_date'];
+                        $id = $stack['id'];
                     ?>
                         <tr>
                             <td>
@@ -42,7 +43,7 @@ Template Name: Stacks Page
                             <td><?php echo $start_date; ?></td>
                             <td><?php echo $end_date; ?></td>
                             <td>
-                                <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/"></a>
+                                <a style="color:#000;" class="bi bi-pencil-square" href="http://localhost/EasyManage/update-stack/?stack_id=<?php echo $id ?>"></a>
                             </td>
                         </tr>
                     <?php } ?>
