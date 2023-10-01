@@ -7,7 +7,7 @@
 /**
  * Plugin Name: EasyManage
  * Plugin URI:  https://easymanage.com
- * Description: Plana Plugin is the best go-to tool for easy management functionality
+ * Description: EasyManage Plugin is the best go-to tool for easy management functionality
  * Version:     1.0
  * Author:      Nicholas Kirui
  * Author URI:  https://nicholaskirui.com
